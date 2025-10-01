@@ -1,0 +1,14 @@
+{
+  "option": {
+    "statistics": "Statistics",
+    "signOut": "Sign Out"
+  },
+  "menu": {
+    "bookingSchedule": "Booking Schedule",
+    "searchTechnicians": "Search Technicians",
+    "serviceHistory": "Service History"
+  },
+  "language": {
+    "code": "EN"
+  }
+}

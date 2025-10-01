@@ -1,0 +1,14 @@
+{
+  "option": {
+    "statistics": "Estadísticas",
+    "signOut": "Cerrar Sesión"
+  },
+  "menu": {
+    "bookingSchedule": "Agenda de Reservas",
+    "searchTechnicians": "Buscar Técnicos",
+    "serviceHistory": "Historial de Servicios"
+  },
+  "language": {
+    "code": "ES"
+  }
+}

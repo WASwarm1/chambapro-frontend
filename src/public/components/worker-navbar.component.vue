@@ -1,10 +1,13 @@
 <script setup>
 import { BarChart, Calendar, LogOut } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const menuItems = [
-  { icon: BarChart, text: 'Estadisticas', id: 'stats' },
-  { icon: Calendar, text: 'Agenda de Reservas', id: 'agenda' },
-  { icon: LogOut, text: 'Cerrar Sesion', id: 'logout' }
+  { icon: BarChart, text: t('menu.stats'), id: 'stats' },
+  { icon: Calendar, text: t('menu.agenda'), id: 'agenda' },
+  { icon: LogOut, text: t('menu.logout'), id: 'logout' }
 ];
 
 const handleClick = (id) => {

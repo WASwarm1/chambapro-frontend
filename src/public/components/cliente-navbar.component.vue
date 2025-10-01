@@ -1,10 +1,13 @@
 <script setup>
 import { Search, Clock, LogOut } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const menuItems = [
-  { icon: Search, text: 'Buscar técnicos', id: 'search' },
-  { icon: Clock, text: 'Historial de Servicios', id: 'history' },
-  { icon: LogOut, text: 'Cerrar Sesión', id: 'logout' }
+  { icon: Search, text: t('menu.searchTechnicians'), id: 'search' },
+  { icon: Clock, text: t('menu.serviceHistory'), id: 'history' },
+  { icon: LogOut, text: t('menu.logout'), id: 'logout' }
 ];
 
 const handleClick = (id) => {
