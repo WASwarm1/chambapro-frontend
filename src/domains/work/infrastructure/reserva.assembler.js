@@ -1,0 +1,17 @@
+import { Reserva } from '../domain/reserva.entity.js'
+
+export class ReservaAssembler {
+    /**
+     * Converts a DTO to a Reserva entity.
+     * @param dto
+     * @returns {Reserva}
+     */
+
+    static toEntity(dto) {
+        return new Reserva(dto.id, dto.date, dto.time, dto.description, dto.client, dto.category, dto.infoUrl, dto.image);
+    }
+
+    static toEntities(dtos) {
+        return dtos.map((dto) => this.toEntity(dto));
+    }
+}
