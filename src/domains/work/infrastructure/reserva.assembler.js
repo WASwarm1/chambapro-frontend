@@ -8,7 +8,7 @@ export class ReservaAssembler {
      */
 
     static toEntity(dto) {
-        return new Reserva(dto.id, dto.date, dto.time, dto.description, dto.client, dto.category, dto.infoUrl, dto.image);
+        return new Reserva(dto.id, dto.date, dto.time, dto.description, dto.client, dto.category);
     }
 
     static toEntities(dtos) {
