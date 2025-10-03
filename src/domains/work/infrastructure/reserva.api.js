@@ -6,7 +6,7 @@ export class ReservaApi {
      * @returns {Promise<*>}
      */
     async getAll() {
-        const response = await httpInstance.get('reservations');
+        const response = await httpInstance.get('http://localhost:3000/api/v1/reservations');
         return response.data;
     }
 }

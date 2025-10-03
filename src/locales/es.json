@@ -6,9 +6,15 @@
   "menu": {
     "bookingSchedule": "Agenda de Reservas",
     "searchTechnicians": "Buscar Técnicos",
-    "serviceHistory": "Historial de Servicios"
+    "serviceHistory": "Historial de Servicios",
+    "stats": "Estadísticas",
+    "agenda": "Agenda de Reservas",
+    "logout": "Cerrar Sesión"
   },
   "language": {
     "code": "ES"
+  },
+  "reserva": {
+    "myReservationAgenda": "Mi Agenda de Reservas"
   }
 }

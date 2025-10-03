@@ -6,9 +6,16 @@
   "menu": {
     "bookingSchedule": "Booking Schedule",
     "searchTechnicians": "Search Technicians",
-    "serviceHistory": "Service History"
+    "serviceHistory": "Service History",
+    "stats": "Statistics",
+    "agenda": "Reservation Agenda",
+    "logout": "Logout"
+
   },
   "language": {
     "code": "EN"
+  },
+  "reserva": {
+    "myReservationAgenda": "My Reservation Agenda"
   }
 }
