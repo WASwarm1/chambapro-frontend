@@ -1,14 +1,15 @@
 <script setup>
 import { BarChart, Calendar, LogOut } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
 
 const { t } = useI18n()
 
-const menuItems = [
+const menuItems = computed(() => [
   { icon: BarChart, text: t('menu.stats'), id: 'stats' },
   { icon: Calendar, text: t('menu.agenda'), id: 'agenda' },
   { icon: LogOut, text: t('menu.logout'), id: 'logout' }
-];
+]);
 
 const handleClick = (id) => {
   console.log(`Clicked: ${id}`);
