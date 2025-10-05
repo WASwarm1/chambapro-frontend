@@ -6,7 +6,20 @@
   "menu": {
     "bookingSchedule": "Booking Schedule",
     "searchTechnicians": "Search Technicians",
-    "serviceHistory": "Service History"
+    "serviceHistory": "Service History",
+    "stats": "Statistics",
+    "agenda": "Reservation Agenda",
+    "logout": "Logout"
+  },
+  "search": {
+    "searchMessage": "Found the professional you need",
+    "plumbing": "Plumbing",
+    "electricity": "Electricity",
+    "carpentry": "Carpentry",
+    "painting": "Painting",
+    "byNameFilter": "Search by name...",
+    "byLastNameFilter": "Search by lastname...",
+    "searchButton": "Search"
   },
   "language": {
     "code": "EN"
