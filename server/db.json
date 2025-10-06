@@ -6,7 +6,23 @@
       "name": "Carlos",
       "lastname": "Mendoza",
       "speciality": "Plomería",
-      "description": "Más de 10 años de experiencia en instalaciones y reparaciones. Formación técnica certificada por SENATI. Especializado en sistemas de agua potable, drenajes, gas e instalaciones sanitarias. Ofrece servicios de mantenimiento preventivo, detección de fugas, destapaciones y reparaciones urgentes con altos estándares de calidad. Su trabajo garantiza soluciones eficientes y cumplimiento de normativas de seguridad."
+      "description": "Más de 10 años de experiencia en instalaciones y reparaciones. Formación técnica certificada por SENATI. Especializado en sistemas de agua potable, drenajes, gas e instalaciones sanitarias. Ofrece servicios de mantenimiento preventivo, detección de fugas, destapaciones y reparaciones urgentes con altos estándares de calidad. Su trabajo garantiza soluciones eficientes y cumplimiento de normativas de seguridad.",
+      "rating" : "4.9",
+      "reviewsCount": 125,
+      "reviews": [
+        {
+          "id" : 1,
+          "author" : "Laura M.",
+          "stars" : 5,
+          "text" : "Excelente servicio. Ricardo fue muy profesional y solucionó el problema rápidamente. Lo recomiendo."
+        },
+        {
+          "id" : 2,
+          "author" : "Carlos F. ",
+          "stars" : 3,
+          "text" : "Buen trabajo"
+        }
+      ]
     },
     {
       "id": 2,

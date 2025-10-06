@@ -38,7 +38,6 @@ const handleClick = (id) => {
   flex-direction: column;
   gap: 1rem;
   padding: 2rem;
-  margin-top: 3rem;
   min-height: 20vh;
   width: 100vw;
   left: 50%;
