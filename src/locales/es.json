@@ -24,6 +24,8 @@
   "language": {
     "code": "ES"
   },
+  "reserva": {
+    "myReservationAgenda": "Mi Agenda de Reservas"
 
   "services.welcome": "Bienvenido, Cliente",
   "services": {
