@@ -45,6 +45,7 @@ const handleClick = (id) => {
   transform: translateX(-50%);
   background-color: #F5F5F5;
   box-sizing: border-box;
+  margin-top: 10rem;
 }
 
 .menu-item {

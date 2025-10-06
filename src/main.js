@@ -27,3 +27,5 @@ createApp(App)
     .use(i18n)
     .component('Card', Card)
     .mount('#app')
+
+export default i18n

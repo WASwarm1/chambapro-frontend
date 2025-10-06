@@ -10,7 +10,6 @@ import ReservaList from './domains/work/components/ReservaList.component.vue'
 </script>
 
 <template>
-  <div>
     <Header/>
     <workerNav/>
     <ReservaList/>
@@ -18,4 +17,5 @@ import ReservaList from './domains/work/components/ReservaList.component.vue'
 </template>
 
 <style scoped>
+
 </style>

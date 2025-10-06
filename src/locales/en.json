@@ -12,6 +12,24 @@
     "logout": "Logout"
 
   },
+  "search": {
+    "searchMessage": "Found the professional you need",
+    "plumbing": "Plumbing",
+    "electricity": "Electricity",
+    "carpentry": "Carpentry",
+    "painting": "Painting",
+    "byNameFilter": "Search by name...",
+    "byLastNameFilter": "Search by lastname...",
+    "searchButton": "Search"
+  },
+  "services.welcome": "Welcome, Client",
+  "services": {
+    "title": "My Service History",
+    "date": "Date",
+    "technician": "Technician",
+    "cost": "Cost",
+    "status": "Status"
+  },
   "language": {
     "code": "EN"
   },
