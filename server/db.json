@@ -1,0 +1,62 @@
+{
+  "technicians": [
+    {
+      "id": 1,
+      "image": "",
+      "name": "Carlos",
+      "lastname": "Mendoza",
+      "speciality": "Plomería",
+      "description": "Más de 10 años de experiencia en instalaciones y reparaciones. Formación técnica certificada por SENATI. Especializado en sistemas de agua potable, drenajes, gas e instalaciones sanitarias. Ofrece servicios de mantenimiento preventivo, detección de fugas, destapaciones y reparaciones urgentes con altos estándares de calidad. Su trabajo garantiza soluciones eficientes y cumplimiento de normativas de seguridad.",
+      "rating" : "4.9",
+      "reviewsCount": 125,
+      "reviews": [
+        {
+          "id" : 1,
+          "author" : "Laura M.",
+          "stars" : 5,
+          "text" : "Excelente servicio. Ricardo fue muy profesional y solucionó el problema rápidamente. Lo recomiendo."
+        },
+        {
+          "id" : 2,
+          "author" : "Carlos F. ",
+          "stars" : 3,
+          "text" : "Buen trabajo"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "image": "",
+      "name": "Ricardo",
+      "lastname": "Morales",
+      "speciality": "Electricidad",
+      "description": "Electricista certificado con más de 7 años de experiencia en instalaciones residenciales, comerciales e industriales. Especializado en diseño de circuitos, mantenimiento preventivo y correctivo, y eficiencia energética. Ofrece servicios de diagnóstico, reparación de fallas y modernización de sistemas electrónicos con estrictos estándares de seguridad. Su trabajo garantiza soluciones confiables y cumplimiento de normativas técnicas."
+    }
+  ],
+  "reservations": [
+    {
+      "id": 1,
+      "date": "2025-10-02",
+      "time": "10:00 AM",
+      "description": "Instalación de grifería",
+      "client": "Laura M.",
+      "category": "Instalación"
+    },
+    {
+      "id": 2,
+      "date": "2025-10-03",
+      "time": "02:00 PM",
+      "description": "Reparación de fuga",
+      "client": "Carlos F.",
+      "category": "Reparación"
+    },
+    {
+      "id": 3,
+      "date": "2025-09-11",
+      "time": "09:00 AM",
+      "description": "Mantenimiento de tuberías",
+      "client": "Ana T.",
+      "category": "Mantenimiento"
+    }
+  ]
+}

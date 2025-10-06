@@ -6,9 +6,32 @@
   "menu": {
     "bookingSchedule": "Agenda de Reservas",
     "searchTechnicians": "Buscar Técnicos",
-    "serviceHistory": "Historial de Servicios"
+    "serviceHistory": "Historial de Servicios",
+    "stats": "Estadísticas",
+    "agenda": "Agenda de Reservas",
+    "logout": "Cerrar Sesión"
+  },
+  "search": {
+    "searchMessage": "Encuentra al profesional que necesitas",
+    "plumbing": "Plomería",
+    "electricity": "Electricidad",
+    "carpentry": "Carpintería",
+    "painting": "Pintura",
+    "searchNameFilter": "Buscar por nombre...",
+    "searchLastNameFilter": "Buscar por apellido...",
+    "searchButton": "Buscar"
   },
   "language": {
     "code": "ES"
+  },
+
+  "services.welcome": "Bienvenido, Cliente",
+  "services": {
+    "title": "Mi historial de Servicios",
+    "date": "Fecha",
+    "technician": "Técnico",
+    "cost": "Costo",
+    "status": "Estado"
   }
+
 }
