@@ -27,7 +27,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import HistoryServiceCard from './HistoryServiceCard.component.vue'
+import HistoryServiceCard from './HistoryserviceCard.component.vue'
 import { getTechnicians, getReservations} from "../infrastructure/history-services.api.js";
 import { assembleHistoryServices} from "../infrastructure/history-services.assembler.js";
 
