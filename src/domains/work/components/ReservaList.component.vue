@@ -10,7 +10,7 @@
 
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import ReservaCard from './reservaCard.component.vue';
+import ReservaCard from './ReservaCard.component.vue';
 import { ReservaApi } from '../infrastructure/reserva.api.js';
 import { ReservaAssembler } from '../infrastructure/reserva.assembler.js';
 
