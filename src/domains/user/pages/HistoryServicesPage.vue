@@ -1,12 +1,15 @@
 <script setup>
-import Header from './public/components/header-content.component.vue'
-import ClienteNavbar from "./public/components/cliente-navbar.component.vue";
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-// Datos simulados del historial
+/**
+ * Historial de servicios realizados por el usuario.
+ * @description Este array contiene objetos que representan cada servicio con su fecha, técnico asignado, costo y estado.
+ * @type {Array<{fecha: string, tecnico: string, costo: number, estado: string}>}
+ */
+
 const historial = ref([
   { fecha: '01/08/2025', tecnico: 'Carlos Mendoza', costo: 150.0, estado: 'Completado' },
   { fecha: '15/07/2025', tecnico: 'Ana Tomes', costo: 250.0, estado: 'Completado' },
@@ -16,14 +19,6 @@ const historial = ref([
 </script>
 
 <template>
-  <div>
-    <header class="header-bar">
-      <h1>{{ t('services.welcome') }}</h1>
-      <p class="subtext">{{ t('services.subtitle') }}</p>
-    </header>
-    <Header/>
-    <ClienteNavbar/>
-  </div>
   <div class="historial-container">
 
     <h2>{{ t('services.title') }}</h2>
