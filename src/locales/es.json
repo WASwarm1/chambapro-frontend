@@ -23,5 +23,15 @@
   },
   "language": {
     "code": "ES"
+  },
+
+  "services.welcome": "Bienvenido, Cliente",
+  "services": {
+    "title": "Mi historial de Servicios",
+    "date": "Fecha",
+    "technician": "Técnico",
+    "cost": "Costo",
+    "status": "Estado"
   }
+
 }

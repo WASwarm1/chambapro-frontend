@@ -21,6 +21,14 @@
     "byLastNameFilter": "Search by lastname...",
     "searchButton": "Search"
   },
+  "services.welcome": "Welcome, Client",
+  "services": {
+    "title": "My Service History",
+    "date": "Date",
+    "technician": "Technician",
+    "cost": "Cost",
+    "status": "Status"
+  },
   "language": {
     "code": "EN"
   }
