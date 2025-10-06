@@ -3,6 +3,7 @@ import './style.css'
 import App from './App.vue'
 import PrimeVue from 'primevue/config';
 import Card from 'primevue/card';
+import router from './router/index.js'
 
 
 import { createI18n } from 'vue-i18n'
@@ -25,6 +26,7 @@ createApp(App)
     .use(PrimeVue, {
     })
     .use(i18n)
+    .use(router)
     .component('Card', Card)
     .mount('#app')
 

@@ -31,6 +31,7 @@ import LanguageSwitcher from '../components/language-switcher.component.vue'
   width: 100vw;
   left: 0;
   top: 0;
+  z-index: 1000;
 }
 
 .header-content {

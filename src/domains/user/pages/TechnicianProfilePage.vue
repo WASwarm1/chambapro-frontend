@@ -1,11 +1,9 @@
 <script setup>
-import Header from '../../../public/components/header-content.component.vue'; // Ajusta la ruta si es necesario
-import ClienteNavbar from '../../../public/components/cliente-navbar.component.vue'; // Ajusta la ruta si es necesario
-import TechnicianProfileContent from '../components/TechnicianProfileContent.component.vue'; // ¡Importante! Ver paso 2
+import ClienteNavbar from '../../../public/components/cliente-navbar.component.vue';
+import TechnicianProfileContent from '../components/TechnicianProfileContent.component.vue';
 </script>
 
 <template>
-  <Header/>
   <ClienteNavbar/>
   <TechnicianProfileContent/>
 </template>
