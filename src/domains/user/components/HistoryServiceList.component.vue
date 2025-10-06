@@ -1,7 +1,5 @@
 <template>
   <div class="history-list">
-    <p class="welcome">{{ t('services.welcome') }}</p>
-
     <h1>{{ t('services.title') }}</h1>
 
     <table class="service-table" v-if="services.length">
@@ -48,11 +46,6 @@ onMounted(async () => {
 <style scoped>
 .history-list {
   padding: 2rem;
-}
-.welcome {
-  font-size: 1rem;
-  color: #4b5563;
-  margin-bottom: 0.5rem;
 }
 .service-table {
   width: 100%;

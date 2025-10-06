@@ -14,7 +14,7 @@ const routes = [
         component: AgendaDeReservasPage
     },
     {
-        path: '/tech/history',
+        path: '/client/history',
         name: 'HistoryService',
         component: HistoryServicePage
     },
