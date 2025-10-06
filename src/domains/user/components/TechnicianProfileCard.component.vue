@@ -1,0 +1,82 @@
+<script setup>
+
+defineProps({
+  tecnico: {
+    type: Object,
+    required: true
+  }
+})
+</script>
+
+<template>
+  <section class="profile-card">
+    <img :src="tecnico.avatar" alt="Foto de perfil del técnico" class="profile-avatar" />
+    <div class="profile-info">
+      <h1 class="technician-name">{{ tecnico.name }} {{ tecnico.lastname }}</h1>
+      <p class="technician-specialty">{{ tecnico.specialty }}</p>
+      <div v-if="tecnico.rating" class="technician-rating">
+        <span class="star-icon">★</span>
+        <span>{{ tecnico.rating }}</span>
+        <span class="reviews-count">({{ tecnico.reviewsCount }} reseñas)</span>
+      </div>
+      <button class="primary-button">Contratar Servicio</button>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+/* Estos estilos son específicos para esta tarjeta y no afectarán a otros componentes */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eee;
+}
+
+.technician-name {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.technician-specialty {
+  margin: 0.2rem 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.technician-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.primary-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: #16a085;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: #117a65;
+}
+
+.star-icon {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+</style>
