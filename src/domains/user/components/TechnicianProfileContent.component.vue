@@ -1,14 +1,14 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { TecnicoApi } from '../infrastructure/tecnico.api.js';
 import TechnicianProfileCard from '../components/TechnicianProfileCard.component.vue';
 import ReviewsSection from "./ReviewsSection.component.vue";
 
 
 const { t } = useI18n();
-const route = useRouter();
+const route = useRoute();
 const technician = ref(null);
 const reviews = computed(() => technician.value?.reviews || []);
 
