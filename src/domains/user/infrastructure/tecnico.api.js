@@ -1,5 +1,5 @@
 import { httpInstance } from '../../../shared/services/http.instance.js'
-import { TecnicoAssembler, toTechnicianProfileViewModel } from './tecnico.assembler.js';
+import { toTechnicianProfileViewModel } from './tecnico.assembler.js';
 
 export class TecnicoApi {
     /**
