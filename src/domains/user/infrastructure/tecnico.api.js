@@ -7,7 +7,7 @@ export class TecnicoApi {
      * @returns {Promise<*>}
      */
     async getAll() {
-        const response = await httpInstance.get('technicians');
+        const response = await httpInstance.get('https://68e464108e116898997bb2b6.mockapi.io/api/v1/technicians');
         return response.data;
     }
     /**
@@ -17,7 +17,7 @@ export class TecnicoApi {
      */
     static async getById(id) {
 
-        const response = await httpInstance.get(`/technicians/${id}`);
+        const response = await httpInstance.get(`https://68e464108e116898997bb2b6.mockapi.io/api/v1/technicians/${id}`);
         const rawData = response.data;
 
 
