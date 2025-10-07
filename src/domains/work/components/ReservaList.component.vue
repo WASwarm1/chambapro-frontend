@@ -27,8 +27,8 @@ onMounted(async () => {
 <template>
   <section aria-labelledby="my-reservations-title">
     <h2 id="my-reservations-title">{{ t('reserva.myReservationAgenda') }}</h2>
-    <div class="p-grid">
-      <div v-for="reserva in reservas" :key="reserva.id" class="p-col-12 p-md-6 p-lg-4">
+    <div class="p-grid" style="justify-content: center;">
+      <div v-for="reserva in reservas" :key="reserva.id" class="p-col-12 p-md-6 p-lg-4" style="display: flex; justify-content: center;">
         <reserva-card :reserva="reserva" />
       </div>
     </div>

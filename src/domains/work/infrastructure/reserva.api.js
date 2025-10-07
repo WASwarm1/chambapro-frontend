@@ -6,7 +6,7 @@ export class ReservaApi {
      * @returns {Promise<*>}
      */
     async getAll() {
-        const response = await httpInstance.get('http://localhost:3000/api/v1/reservations');
+        const response = await httpInstance.get('https://68e464108e116898997bb2b6.mockapi.io/api/v1/reservations');
         return response.data;
     }
 }
