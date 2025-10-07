@@ -32,7 +32,7 @@ function handleReviewSubmitted(reviewText) {
 <template>
   <div class="page-background">
     <main class="profile-container">
-      <a href="#" class="back-link">&larr; Volver a la búsqueda</a>
+      <a href="/client/techsearch" class="back-link">&larr; Volver a la búsqueda</a>
       <TechnicianProfileCard v-if="technician" :tecnico="technician" />
       <ReviewsSection v-if="technician" :reviews="reviews" @review-submitted="handleReviewSubmitted" />
       <div v-else>
