@@ -24,7 +24,7 @@ const routes = [
         component: TechnicianSearch
     },
     {
-        path: '/client/:technicianName/profile',
+        path: '/client/profile/:id',
         name: 'TechnicianProfile',
         component: TechnicianProfilePage,
         props: true

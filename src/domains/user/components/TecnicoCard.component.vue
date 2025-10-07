@@ -1,4 +1,6 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
 /**
  * TecnicoCard Component
  * Displays information about a technician including image, date, time, description, client, category, and a button to see more details.
@@ -13,6 +15,12 @@ const props = defineProps({
     default: () => ({})
   }
 })
+
+const router = useRouter()
+
+const goToProfile = () => {
+  router.push(`/client/profile/${props.tecnico.id}`)
+}
 </script>
 
 
@@ -28,6 +36,8 @@ const props = defineProps({
       </header>
 
       <p class="techinician_description">{{ tecnico.description }}</p>
+
+      <button class="profile_button" @click="goToProfile">Ver Perfil</button>
     </div>
   </article>
 </template>
@@ -55,5 +65,19 @@ const props = defineProps({
   color: #333;
   text-align: justify;
   font-size: 1.0rem;
+  margin-bottom: 1rem;
+}
+.profile_button {
+  background-color: #1b9a92;
+  color: black;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+.profile_button:hover {
+  background-color: #17817d;
 }
 </style>
