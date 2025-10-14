@@ -24,7 +24,11 @@ defineProps({
             <span>{{ technician.rating }}</span>
             <span class="reviews-count">({{ technician.reviewsCount }} {{ t('profile.reviews') }})</span>
           </div>
-          <pv-button :label="t('profile.hireService')" class="primary-button" />
+          <pv-button
+              :label="t('profile.hireService')"
+              class="primary-button mt-2"
+              @click="$router.push(`/client/hire/${technician.id}`)"
+          />
         </div>
       </div>
     </template>

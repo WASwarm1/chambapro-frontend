@@ -18,6 +18,7 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Tag from "primevue/tag";
 import Password from "primevue/password";
+import InputNumber from "primevue/inputnumber";
 
 import Aura from '@primeuix/themes/aura';
 
@@ -60,6 +61,7 @@ app.component('pv-data-table', DataTable)
 app.component('pv-column', Column)
 app.component('pv-tag', Tag)
 app.component('pv-password', Password)
+app.component('pv-input-number', InputNumber)
 
 app.mount('#app')
 

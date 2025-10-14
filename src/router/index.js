@@ -6,6 +6,7 @@ const HistoryServicePage = () => import('../domains/user/pages/history-services-
 const TechnicianSearch = () => import('../domains/user/pages/technician-search-page.vue')
 const TechnicianProfilePage = () => import('../domains/user/pages/technician-profile-page.vue')
 const PageNotFound = () => import('../public/pages/page-not-found.component.vue')
+const TechnicianHirePage = () => import('../domains/work/pages/hire-technician-page.vue')
 
 const routes = [
     {
@@ -48,6 +49,12 @@ const routes = [
         component: TechnicianProfilePage,
         props: true,
         meta: { title: 'Technician Profile', requiresAuth: true, userType: 'client' }
+    },
+    {
+        path: '/client/hire/:id',
+        name: 'hire-technician',
+        component: TechnicianHirePage,
+        meta: { title: 'Hire Technician', requiresAuth: true, userType: 'client' }
     },
     {
         path: '/:pathMatch(.*)*',
