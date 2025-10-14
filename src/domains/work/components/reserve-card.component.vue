@@ -1,6 +1,6 @@
 <script setup>
 /**
- * ReservaCard Component
+ * ReserveCardComponent Component
  * Displays information about a reservation including image, date, time, description, client, category, and a button to see more details.
  * Props:
  * - reserva: Object containing details about the reservation (date, time, description, client, category, infoUrl, image)

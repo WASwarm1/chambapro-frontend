@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <HistoryServiceCard
+      <HistoryServiceCardComponent
           v-for="(service, index) in services"
           :key="index"
           :service="service"
@@ -27,7 +27,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import HistoryServiceCard from './HistoryserviceCard.component.vue'
+import HistoryServiceCardComponent from './history-service-card.component.vue'
 import { getTechnicians, getReservations} from "../infrastructure/history-services.api.js";
 import { assembleHistoryServices} from "../infrastructure/history-services.assembler.js";
 

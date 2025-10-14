@@ -1,4 +1,4 @@
-import { Reserva } from '../domain/reserva.entity.js'
+import { Reserva } from '../domain/reserve.entity.js'
 
 export class ReservaAssembler {
     /**

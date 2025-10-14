@@ -2,9 +2,9 @@
 import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { TecnicoApi } from '../infrastructure/tecnico.api.js';
-import TechnicianProfileCard from '../components/TechnicianProfileCard.component.vue';
-import ReviewsSection from "./ReviewsSection.component.vue";
+import { TechnicianApi } from '../infrastructure/technician.api.js';
+import TechnicianProfileCardComponent from './technician-profile-card.component.vue';
+import ReviewsSectionComponent from "./reviews-section.component.vue";
 
 
 const { t } = useI18n();
@@ -16,7 +16,7 @@ onMounted(async () => {
   try {
     const technicianId = route.params.id;
     if (technicianId) {
-      technician.value = await TecnicoApi.getById(technicianId);
+      technician.value = await TechnicianApi.getById(technicianId);
     }
   } catch (error) {
     console.error(`Error al cargar los datos del técnico:`, error);
@@ -33,8 +33,8 @@ function handleReviewSubmitted(reviewText) {
   <div class="page-background">
     <main class="profile-container">
       <a href="/client/techsearch" class="back-link">&larr; Volver a la búsqueda</a>
-      <TechnicianProfileCard v-if="technician" :tecnico="technician" />
-      <ReviewsSection v-if="technician" :reviews="reviews" @review-submitted="handleReviewSubmitted" />
+      <TechnicianProfileCardComponent v-if="technician" :technician="technician" />
+      <ReviewsSectionComponent v-if="technician" :reviews="reviews" @review-submitted="handleReviewSubmitted" />
       <div v-else>
         <p>Cargando perfil del técnico...</p>
       </div>

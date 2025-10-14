@@ -1,7 +1,7 @@
 <script setup>
 
 defineProps({
-  tecnico: {
+  technician: {
     type: Object,
     required: true
   }
@@ -10,14 +10,14 @@ defineProps({
 
 <template>
   <section class="profile-card">
-    <img :src="tecnico.avatar" alt="Foto de perfil del técnico" class="profile-avatar" />
+    <img :src="technician.avatar" alt="Foto de perfil del técnico" class="profile-avatar" />
     <div class="profile-info">
-      <h1 class="technician-name">{{ tecnico.name }} {{ tecnico.lastname }}</h1>
+      <h1 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h1>
       <p class="technician-specialty">{{ tecnico.specialty }}</p>
-      <div v-if="tecnico.rating" class="technician-rating">
+      <div v-if="technician.rating" class="technician-rating">
         <span class="star-icon">★</span>
-        <span>{{ tecnico.rating }}</span>
-        <span class="reviews-count">({{ tecnico.reviewsCount }} reseñas)</span>
+        <span>{{ technician.rating }}</span>
+        <span class="reviews-count">({{ technician.reviewsCount }} reseñas)</span>
       </div>
       <button class="primary-button">Contratar Servicio</button>
     </div>

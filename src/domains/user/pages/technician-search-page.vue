@@ -1,6 +1,6 @@
 <script setup>
 
-import TecnicoList from '../components/TecnicoList.component.vue'
+import TechnicianListComponent from '../components/technician-list.component.vue'
 import ClienteNavbar from '../../../public/components/cliente-navbar.component.vue'
 
 </script>
@@ -10,7 +10,7 @@ import ClienteNavbar from '../../../public/components/cliente-navbar.component.v
     <ClienteNavbar/>
   </header>
 
-  <TecnicoList/>
+  <TechnicianListComponent/>
 </template>
 
 <style scoped>

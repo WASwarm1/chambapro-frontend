@@ -1,6 +1,6 @@
 import { httpInstance } from '../../../shared/services/http.instance.js'
 
-export class ReservaApi {
+export class ReserveApi {
     /**
      * Fetches all reservations from the API.
      * @returns {Promise<*>}

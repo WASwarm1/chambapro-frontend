@@ -1,6 +1,6 @@
 <script setup>
 
-import reservaList from '../components/ReservaList.component.vue'
+import ReserveListComponent from '../components/reserve-list.component.vue'
 import workerNav from '../../../public/components/worker-navbar.component.vue'
 
 </script>
@@ -8,7 +8,7 @@ import workerNav from '../../../public/components/worker-navbar.component.vue'
 <template>
 
   <workerNav/>
-  <reservaList/>
+  <ReserveListComponent/>
 </template>
 
 <style scoped>

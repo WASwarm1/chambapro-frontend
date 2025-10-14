@@ -1,4 +1,4 @@
-export class Reserva {
+export class Reserve {
     /**
      * Creates an instance of Reserva.
      * @param id

@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 
-const AgendaDeReservasPage = () => import('../domains/work/pages/AgendaDeReservasPage.vue')
-const HistoryServicePage = () => import('../domains/user/pages/HistoryServicesPage.vue')
-const TechnicianSearch = () => import('../domains/user/pages/TechnicianSearchPage.vue')
-const TechnicianProfilePage = () => import('../domains/user/pages/TechnicianProfilePage.vue')
+const AgendaDeReservasPage = () => import('../domains/work/pages/reservation-agenda-page.vue')
+const HistoryServicePage = () => import('../domains/user/pages/history-services-page.vue')
+const TechnicianSearch = () => import('../domains/user/pages/technician-search-page.vue')
+const TechnicianProfilePage = () => import('../domains/user/pages/technician-profile-page.vue')
 const PageNotFound = () => import('../public/pages/page-not-found.component.vue')
 
 const routes = [
