@@ -52,10 +52,19 @@
     "date": "Date",
     "technician": "Technician",
     "cost": "Cost",
-    "status": "Status"
+    "status": "Status",
+    "description": "Description"
   },
   "history": {
-    "loading": "Loading history..."
+    "loading": "Loading services...",
+    "loadError": "Error loading services",
+    "retry": "Try Again",
+    "refresh": "Refresh",
+    "noServices": "No services found",
+    "noServicesMessage": "You haven't booked any services yet.",
+    "findTechnicians": "Find Technicians",
+    "totalServices": "Total: {count} services",
+    "completedServices": "Completed: {count}"
   },
   "language": {
     "code": "EN"

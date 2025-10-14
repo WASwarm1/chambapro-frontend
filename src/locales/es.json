@@ -52,10 +52,19 @@
     "date": "Fecha",
     "technician": "Técnico",
     "cost": "Costo",
-    "status": "Estado"
+    "status": "Estado",
+    "description": "Descripción"
   },
   "history": {
-    "loading": "Cargando historial..."
+    "loading": "Cargando servicios...",
+    "loadError": "Error al cargar servicios",
+    "retry": "Intentar Nuevamente",
+    "refresh": "Actualizar",
+    "noServices": "No se encontraron servicios",
+    "noServicesMessage": "Aún no has contratado ningún servicio.",
+    "findTechnicians": "Buscar Técnicos",
+    "totalServices": "Total: {count} servicios",
+    "completedServices": "Completados: {count}"
   },
   "language": {
     "code": "ES"
