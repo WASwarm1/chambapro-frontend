@@ -11,18 +11,6 @@
     "agenda": "Agenda de Reservas",
     "logout": "Cerrar Sesión"
   },
-  "search": {
-    "searchMessage": "Encuentra al profesional que necesitas",
-    "plumbing": "Plomería",
-    "electricity": "Electricidad",
-    "carpentry": "Carpintería",
-    "painting": "Pintura",
-    "byNameFilter": "Buscar por nombre...",
-    "byLastNameFilter": "Buscar por apellido...",
-    "searchButton": "Buscar",
-    "selectSpecialty": "Seleccionar especialidad",
-    "loadError": "Error cargando técnicos"
-  },
   "profile": {
     "backToSearch": "Volver a la búsqueda",
     "loading": "Cargando perfil del técnico...",
@@ -59,5 +47,32 @@
   },
   "reserva": {
     "myReservationAgenda": "Mi Agenda de Reservas"
+  },
+  "search": {
+    "searchMessage": "Encuentra al profesional que necesitas",
+    "plumbing": "Plomería",
+    "electricity": "Electricidad",
+    "carpentry": "Carpintería",
+    "painting": "Pintura",
+    "byNameFilter": "Buscar por nombre...",
+    "byLastNameFilter": "Buscar por apellido...",
+    "searchButton": "Buscar",
+    "searching": "Buscando...",
+    "selectSpecialty": "Seleccionar especialidad",
+    "loadError": "Error cargando técnicos",
+    "clearFilters": "Limpiar Filtros",
+    "showing": "Mostrando",
+    "of": "de",
+    "technicians": "técnicos",
+    "noResults": "No se encontraron resultados",
+    "loading": "Cargando técnicos...",
+    "error": "Error",
+    "retry": "Intentar Nuevamente",
+    "noTechniciansFound": "No se encontraron técnicos",
+    "tryDifferentFilters": "Intenta ajustar tus filtros de búsqueda o limpia todos los filtros para ver todos los técnicos.",
+    "clearAllFilters": "Limpiar Todos los Filtros",
+    "filtersPending": "Los filtros han sido modificados. Haz clic en 'Buscar' para aplicarlos.",
+    "filtersApplied": "filtros aplicados",
+    "allTechniciansShown": "Actualmente se muestran todos los técnicos. Usa los filtros de arriba para refinar tu búsqueda."
   }
 }

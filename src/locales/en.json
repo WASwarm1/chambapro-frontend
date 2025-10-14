@@ -11,18 +11,6 @@
     "agenda": "Reservation Agenda",
     "logout": "Logout"
   },
-  "search": {
-    "searchMessage": "Found the professional you need",
-    "plumbing": "Plumbing",
-    "electricity": "Electricity",
-    "carpentry": "Carpentry",
-    "painting": "Painting",
-    "byNameFilter": "Search by name...",
-    "byLastNameFilter": "Search by lastname...",
-    "searchButton": "Search",
-    "selectSpecialty": "Select specialty",
-    "loadError": "Error loading technicians"
-  },
   "profile": {
     "backToSearch": "Back to search",
     "loading": "Loading technician profile...",
@@ -59,5 +47,32 @@
   },
   "reserva": {
     "myReservationAgenda": "My Reservation Agenda"
+  },
+  "search": {
+    "searchMessage": "Found the professional you need",
+    "plumbing": "Plumbing",
+    "electricity": "Electricity",
+    "carpentry": "Carpentry",
+    "painting": "Painting",
+    "byNameFilter": "Search by name...",
+    "byLastNameFilter": "Search by lastname...",
+    "searchButton": "Search",
+    "searching": "Searching...",
+    "selectSpecialty": "Select specialty",
+    "loadError": "Error loading technicians",
+    "clearFilters": "Clear Filters",
+    "showing": "Showing",
+    "of": "of",
+    "technicians": "technicians",
+    "noResults": "No results found",
+    "loading": "Loading technicians...",
+    "error": "Error",
+    "retry": "Try Again",
+    "noTechniciansFound": "No technicians found",
+    "tryDifferentFilters": "Try adjusting your search filters or clear all filters to see all technicians.",
+    "clearAllFilters": "Clear All Filters",
+    "filtersPending": "Filters have been changed. Click 'Search' to apply them.",
+    "filtersApplied": "filters applied",
+    "allTechniciansShown": "All technicians are currently shown. Use the filters above to narrow down your search."
   }
 }
