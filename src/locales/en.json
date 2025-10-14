@@ -15,11 +15,9 @@
     "backToSearch": "Back to search",
     "loading": "Loading technician profile...",
     "loadError": "Error loading technician data:",
+    "notFound": "Technician not found",
     "newReviewReceived": "New review received:",
-    "thankYouReview": "Thank you for your review!",
-    "avatarAlt": "Technician profile photo",
-    "reviews": "reviews",
-    "hireService": "Hire Service"
+    "thankYouReview": "Thank you for your review!"
   },
   "card": {
     "technicianImageAlt": "Technician image",
@@ -28,9 +26,19 @@
   },
   "reviews": {
     "clientReviews": "Customer Reviews",
-    "leaveReview": "Leave your review:",
-    "shareExperience": "Share your experience...",
-    "submitReview": "Submit Review"
+    "leaveReview": "Leave your review",
+    "yourRating": "Your Rating",
+    "yourReview": "Your Review",
+    "shareExperience": "Share your experience with this technician...",
+    "submitReview": "Submit Review",
+    "submitting": "Submitting...",
+    "submitSuccess": "Thank you for your review!",
+    "submitError": "Error submitting review. Please try again.",
+    "emptyReview": "Please write a review before submitting.",
+    "onlyClientsCanReview": "Only clients can leave reviews.",
+    "loginAsClient": "Login as Client",
+    "loading": "Loading reviews...",
+    "noReviews": "No reviews yet. Be the first to review this technician!"
   },
   "services": {
     "title": "My Service History",

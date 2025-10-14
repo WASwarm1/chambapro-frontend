@@ -1,62 +1,360 @@
 {
-  "technicians": [
+  "users": [
     {
       "id": 1,
-      "image": "",
-      "name": "Carlos",
-      "lastname": "Mendoza",
-      "speciality": "Plomería",
-      "description": "Más de 10 años de experiencia en instalaciones y reparaciones. Formación técnica certificada por SENATI. Especializado en sistemas de agua potable, drenajes, gas e instalaciones sanitarias. Ofrece servicios de mantenimiento preventivo, detección de fugas, destapaciones y reparaciones urgentes con altos estándares de calidad. Su trabajo garantiza soluciones eficientes y cumplimiento de normativas de seguridad.",
-      "rating" : "4.9",
-      "reviewsCount": 125,
-      "reviews": [
-        {
-          "id" : 1,
-          "author" : "Laura M.",
-          "stars" : 5,
-          "text" : "Excelente servicio. Ricardo fue muy profesional y solucionó el problema rápidamente. Lo recomiendo."
-        },
-        {
-          "id" : 2,
-          "author" : "Carlos F. ",
-          "stars" : 3,
-          "text" : "Buen trabajo"
-        }
-      ]
+      "type": "client",
+      "email": "cliente@ejemplo.com",
+      "password": "password123",
+      "name": "María",
+      "lastname": "Gonzalez",
+      "phone": "+51 987 654 321",
+      "avatar": "/avatars/client1.jpg",
+      "createdAt": "2024-01-15T10:00:00Z"
     },
     {
       "id": 2,
-      "image": "",
-      "name": "Ricardo",
-      "lastname": "Morales",
+      "type": "client",
+      "email": "juan@ejemplo.com",
+      "password": "password123",
+      "name": "Juan",
+      "lastname": "Perez",
+      "phone": "+51 987 654 322",
+      "avatar": "/avatars/client2.jpg",
+      "createdAt": "2024-02-20T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "type": "technician",
+      "email": "tecnico@ejemplo.com",
+      "password": "password123",
+      "name": "Carlos",
+      "lastname": "Rodriguez",
+      "phone": "+51 987 654 323",
+      "avatar": "/avatars/tech1.jpg",
+      "speciality": "Plomería",
+      "description": "Especialista en plomería residencial con 8 años de experiencia. Reparación de tuberías, instalación de grifería y solución de problemas de drenaje.",
+      "experience": "8 años",
+      "rating": 4.8,
+      "reviewsCount": 47,
+      "hourlyRate": 45,
+      "isAvailable": true,
+      "createdAt": "2023-11-10T09:15:00Z"
+    },
+    {
+      "id": 4,
+      "type": "technician",
+      "email": "ana@ejemplo.com",
+      "password": "password123",
+      "name": "Ana",
+      "lastname": "Martinez",
+      "phone": "+51 987 654 324",
+      "avatar": "/avatars/tech2.jpg",
       "speciality": "Electricidad",
-      "description": "Electricista certificado con más de 7 años de experiencia en instalaciones residenciales, comerciales e industriales. Especializado en diseño de circuitos, mantenimiento preventivo y correctivo, y eficiencia energética. Ofrece servicios de diagnóstico, reparación de fallas y modernización de sistemas electrónicos con estrictos estándares de seguridad. Su trabajo garantiza soluciones confiables y cumplimiento de normativas técnicas."
+      "description": "Electricista certificada con 6 años de experiencia en instalaciones eléctricas residenciales y comerciales. Especializada en paneles solares.",
+      "experience": "6 años",
+      "rating": 4.5,
+      "reviewsCount": 2,
+      "hourlyRate": 50,
+      "isAvailable": true,
+      "createdAt": "2023-12-05T11:20:00Z"
+    },
+    {
+      "id": 5,
+      "type": "technician",
+      "email": "pedro@ejemplo.com",
+      "password": "password123",
+      "name": "Pedro",
+      "lastname": "Lopez",
+      "phone": "+51 987 654 325",
+      "avatar": "/avatars/tech3.jpg",
+      "speciality": "Carpintería",
+      "description": "Maestro carpintero con 12 años de experiencia. Especializado en muebles personalizados, reparación de muebles y trabajos en madera.",
+      "experience": "12 años",
+      "rating": 4.7,
+      "reviewsCount": 63,
+      "hourlyRate": 40,
+      "isAvailable": true,
+      "createdAt": "2023-10-22T08:45:00Z"
+    },
+    {
+      "id": 6,
+      "type": "technician",
+      "email": "lucia@ejemplo.com",
+      "password": "password123",
+      "name": "Lucía",
+      "lastname": "Garcia",
+      "phone": "+51 987 654 326",
+      "avatar": "/avatars/tech4.jpg",
+      "speciality": "Pintura",
+      "description": "Pintora profesional con 5 años de experiencia. Especializada en pintura de interiores, exteriores y trabajos de decoración.",
+      "experience": "5 años",
+      "rating": 4.6,
+      "reviewsCount": 28,
+      "hourlyRate": 35,
+      "isAvailable": false,
+      "createdAt": "2024-01-08T13:10:00Z"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "technicianId": 3,
+      "date": "2024-03-15",
+      "time": "09:00",
+      "description": "Reparación de fuga en tubería principal del baño",
+      "category": "Plomería",
+      "status": "completed",
+      "cost": 120,
+      "duration": "2 horas",
+      "address": "Av. Principal 123, Miraflores, Lima",
+      "createdAt": "2024-03-10T14:20:00Z"
+    },
+    {
+      "id": 2,
+      "clientId": 1,
+      "technicianId": 4,
+      "date": "2024-03-20",
+      "time": "14:00",
+      "description": "Instalación de tomacorrientes en cocina",
+      "category": "Electricidad",
+      "status": "completed",
+      "cost": 80,
+      "duration": "1.5 horas",
+      "address": "Av. Principal 123, Miraflores, Lima",
+      "createdAt": "2024-03-12T10:15:00Z"
+    },
+    {
+      "id": 3,
+      "clientId": 2,
+      "technicianId": 5,
+      "date": "2024-03-18",
+      "time": "10:30",
+      "description": "Reparación de mesa de comedor",
+      "category": "Carpintería",
+      "status": "pending",
+      "cost": 60,
+      "duration": "1 hora",
+      "address": "Calle Los Pinos 456, San Isidro, Lima",
+      "createdAt": "2024-03-14T16:45:00Z"
+    },
+    {
+      "id": 4,
+      "clientId": 2,
+      "technicianId": 6,
+      "date": "2024-03-25",
+      "time": "11:00",
+      "description": "Pintura de sala y comedor",
+      "category": "Pintura",
+      "status": "confirmed",
+      "cost": 200,
+      "duration": "4 horas",
+      "address": "Calle Los Pinos 456, San Isidro, Lima",
+      "createdAt": "2024-03-16T09:30:00Z"
+    },
+    {
+      "id": 5,
+      "clientId": 1,
+      "technicianId": 3,
+      "date": "2024-04-05",
+      "time": "15:00",
+      "description": "Instalación de nuevo lavadero",
+      "category": "Plomería",
+      "status": "confirmed",
+      "cost": 150,
+      "duration": "3 horas",
+      "address": "Av. Principal 123, Miraflores, Lima",
+      "createdAt": "2024-03-18T11:20:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "serviceId": 1,
+      "technicianId": 3,
+      "clientId": 1,
+      "clientName": "María Gonzalez",
+      "rating": 5,
+      "comment": "Excelente trabajo! Carlos llegó puntual y resolvió el problema rápidamente. Muy profesional.",
+      "createdAt": "2024-03-15T18:30:00Z"
+    },
+    {
+      "id": 2,
+      "serviceId": 2,
+      "technicianId": 4,
+      "clientId": 1,
+      "clientName": "María Gonzalez",
+      "rating": 4,
+      "comment": "Buen trabajo, aunque se retrasó un poco. La calidad del trabajo fue excelente.",
+      "createdAt": "2024-03-20T19:15:00Z"
+    },
+    {
+      "id": 3,
+      "serviceId": 1,
+      "technicianId": 3,
+      "clientId": 2,
+      "clientName": "Juan Perez",
+      "rating": 5,
+      "comment": "Carlos es un excelente profesional. Muy detallista y limpio en su trabajo.",
+      "createdAt": "2024-02-28T16:45:00Z"
+    },
+    {
+      "id": 4,
+      "serviceId": 3,
+      "technicianId": 5,
+      "clientId": 2,
+      "clientName": "Juan Perez",
+      "rating": 5,
+      "comment": "Pedro hizo un trabajo excepcional restaurando mi mesa familiar. Quedó como nueva!",
+      "createdAt": "2024-02-15T14:20:00Z"
+    },
+    {
+      "id": 5,
+      "serviceId": 4,
+      "technicianId": 6,
+      "clientId": 1,
+      "clientName": "María Gonzalez",
+      "rating": 4,
+      "comment": "Lucía tiene muy buen gusto para los colores. El trabajo de pintura quedó perfecto.",
+      "createdAt": "2024-01-22T12:30:00Z"
+    },
+    {
+      "id": 1760471083448,
+      "technicianId": 4,
+      "clientId": 2,
+      "clientName": "Juan Perez",
+      "rating": 5,
+      "comment": "Muy buen trabajo!",
+      "serviceId": null,
+      "createdAt": "2025-10-14T19:44:43.448Z"
     }
   ],
   "reservations": [
     {
       "id": 1,
-      "date": "2025-10-02",
-      "time": "10:00 AM",
-      "description": "Instalación de grifería",
-      "client": "Laura M.",
-      "category": "Instalación"
+      "clientId": 1,
+      "technicianId": 3,
+      "date": "2024-04-10",
+      "time": "10:00",
+      "description": "Reparación de ducha principal",
+      "category": "Plomería",
+      "status": "confirmed",
+      "estimatedCost": 90,
+      "estimatedDuration": "2 horas",
+      "address": "Av. Principal 123, Miraflores, Lima",
+      "createdAt": "2024-03-25T09:15:00Z"
     },
     {
       "id": 2,
-      "date": "2025-10-03",
-      "time": "02:00 PM",
-      "description": "Reparación de fuga",
-      "client": "Carlos F.",
-      "category": "Reparación"
+      "clientId": 2,
+      "technicianId": 4,
+      "date": "2024-04-12",
+      "time": "14:30",
+      "description": "Instalación de ventilador de techo",
+      "category": "Electricidad",
+      "status": "pending",
+      "estimatedCost": 120,
+      "estimatedDuration": "2.5 horas",
+      "address": "Calle Los Pinos 456, San Isidro, Lima",
+      "createdAt": "2024-03-26T11:40:00Z"
     },
     {
       "id": 3,
-      "date": "2025-09-11",
-      "time": "09:00 AM",
-      "description": "Mantenimiento de tuberías",
-      "client": "Ana T.",
-      "category": "Mantenimiento"
+      "clientId": 1,
+      "technicianId": 5,
+      "date": "2024-04-15",
+      "time": "09:00",
+      "description": "Fabricación de estantería personalizada",
+      "category": "Carpintería",
+      "status": "confirmed",
+      "estimatedCost": 200,
+      "estimatedDuration": "4 horas",
+      "address": "Av. Principal 123, Miraflores, Lima",
+      "createdAt": "2024-03-27T15:20:00Z"
+    },
+    {
+      "id": 4,
+      "clientId": 2,
+      "technicianId": 6,
+      "date": "2024-04-18",
+      "time": "13:00",
+      "description": "Pintura de fachada exterior",
+      "category": "Pintura",
+      "status": "pending",
+      "estimatedCost": 350,
+      "estimatedDuration": "6 horas",
+      "address": "Calle Los Pinos 456, San Isidro, Lima",
+      "createdAt": "2024-03-28T10:05:00Z"
     }
-  ]
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Plomería",
+      "description": "Servicios de fontanería y reparación de tuberías",
+      "icon": "pi pi-wrench",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Electricidad",
+      "description": "Instalaciones y reparaciones eléctricas",
+      "icon": "pi pi-bolt",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Carpintería",
+      "description": "Trabajos en madera y muebles",
+      "icon": "pi pi-box",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "Pintura",
+      "description": "Servicios de pintura residencial y comercial",
+      "icon": "pi pi-palette",
+      "active": true
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "type": "reservation_confirmed",
+      "title": "Reserva Confirmada",
+      "message": "Tu reserva con Carlos Rodriguez para el 10 de Abril ha sido confirmada",
+      "read": false,
+      "createdAt": "2024-03-25T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "type": "new_review",
+      "title": "Nueva Reseña",
+      "message": "María Gonzalez ha dejado una reseña de 5 estrellas en tu perfil",
+      "read": false,
+      "createdAt": "2024-03-25T14:15:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "type": "reminder",
+      "title": "Recordatorio de Servicio",
+      "message": "Tienes un servicio programado para mañana a las 10:00 AM",
+      "read": true,
+      "createdAt": "2024-03-24T18:00:00Z"
+    }
+  ],
+  "settings": {
+    "appName": "ChambaPro",
+    "version": "1.0.0",
+    "maintenance": false,
+    "supportEmail": "soporte@chambapro.com",
+    "supportPhone": "+51 1 234 5678",
+    "businessHours": {
+      "start": "08:00",
+      "end": "18:00"
+    }
+  }
 }

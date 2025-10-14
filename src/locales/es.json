@@ -15,11 +15,9 @@
     "backToSearch": "Volver a la búsqueda",
     "loading": "Cargando perfil del técnico...",
     "loadError": "Error al cargar los datos del técnico:",
+    "notFound": "Técnico no encontrado",
     "newReviewReceived": "Nueva reseña recibida:",
-    "thankYouReview": "¡Gracias por tu reseña!",
-    "avatarAlt": "Foto de perfil del técnico",
-    "reviews": "reseñas",
-    "hireService": "Contratar Servicio"
+    "thankYouReview": "¡Gracias por tu reseña!"
   },
   "card": {
     "technicianImageAlt": "Imagen del técnico",
@@ -28,9 +26,19 @@
   },
   "reviews": {
     "clientReviews": "Reseñas de Clientes",
-    "leaveReview": "Deja tu reseña:",
-    "shareExperience": "Comparte tu experiencia...",
-    "submitReview": "Enviar Reseña"
+    "leaveReview": "Deja tu reseña",
+    "yourRating": "Tu Calificación",
+    "yourReview": "Tu Reseña",
+    "shareExperience": "Comparte tu experiencia con este técnico...",
+    "submitReview": "Enviar Reseña",
+    "submitting": "Enviando...",
+    "submitSuccess": "¡Gracias por tu reseña!",
+    "submitError": "Error al enviar la reseña. Por favor, intenta nuevamente.",
+    "emptyReview": "Por favor escribe una reseña antes de enviar.",
+    "onlyClientsCanReview": "Solo los clientes pueden dejar reseñas.",
+    "loginAsClient": "Iniciar Sesión como Cliente",
+    "loading": "Cargando reseñas...",
+    "noReviews": "Aún no hay reseñas. ¡Sé el primero en reseñar a este técnico!"
   },
   "services": {
     "title": "Mi historial de Servicios",

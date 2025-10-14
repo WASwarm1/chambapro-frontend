@@ -1,27 +1,53 @@
-import { httpInstance } from '../../../shared/services/http.instance.js'
-import { toTechnicianProfileViewModel } from './technician.assembler.js';
-
 export class TechnicianApi {
-    /**
-     * Fetches all reservations from the API.
-     * @returns {Promise<*>}
-     */
+    constructor() {
+        this.baseURL = 'http://localhost:3000';
+    }
+
     async getAll() {
-        const response = await httpInstance.get('https://68e464108e116898997bb2b6.mockapi.io/api/v1/technicians');
-        return response.data;
-    }
-    /**
-     * Fetches specific technician with ID.
-     * @param {number | string} id .
-     * @returns {Promise<any>}
-     */
-    static async getById(id) {
-
-        const response = await httpInstance.get(`https://68e464108e116898997bb2b6.mockapi.io/api/v1/technicians/${id}`);
-        const rawData = response.data;
-
-
-        return toTechnicianProfileViewModel(rawData);
+        try {
+            const response = await fetch(`${this.baseURL}/users?type=technician`);
+            const technicians = await response.json();
+            return technicians;
+        } catch (error) {
+            console.error('Error fetching technicians:', error);
+            return [];
+        }
     }
 
+    async getById(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/users/${id}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const technician = await response.json();
+
+            if (technician.type !== 'technician') {
+                throw new Error('User is not a technician');
+            }
+
+            const reviewsResponse = await fetch(`${this.baseURL}/reviews?technicianId=${id}`);
+            const reviews = await reviewsResponse.json();
+
+            return {
+                ...technician,
+                reviews: reviews || []
+            };
+        } catch (error) {
+            console.error('Error fetching technician:', error);
+            throw error;
+        }
+    }
+
+    async getBySpecialty(specialty) {
+        try {
+            const response = await fetch(`${this.baseURL}/users?type=technician&speciality=${specialty}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching technicians by specialty:', error);
+            return [];
+        }
+    }
 }

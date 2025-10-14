@@ -14,73 +14,67 @@ const props = defineProps({
 })
 
 const goToProfile = () => {
-  router.push(`/client/profile/${props.technician.id}`)
+  if (props.technician.id) {
+    router.push(`/client/profile/${props.technician.id}`);
+  } else {
+    console.error('Technician has no ID:', props.technician);
+  }
 }
 </script>
 
 <template>
-  <pv-card class="technician-card">
-    <template #content>
-      <div class="flex gap-3">
-        <div class="technician-info flex-1">
-          <div class="flex justify-content-between align-items-start">
-            <div>
-              <h3 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h3>
-              <h4 class="technician-speciality">{{ t('card.specialistIn') }} {{ technician.speciality }}</h4>
-            </div>
+  <article class="technician_card">
+    <div class="technician_image">
+      <img :src="technician.avatar" :alt="t('card.technicianImageAlt')"/>
+    </div>
+    <div class="technician_info">
+      <header>
+        <h3 class="technician_name">{{ technician.name }} {{ technician.lastname }}</h3>
+        <h3 class="technician_speciality">{{ t('card.specialistIn') }} {{ technician.speciality }}</h3>
+      </header>
 
-          </div>
-          <p class="technician-description">{{ technician.description }}</p>
+      <p class="technician_description">{{ technician.description }}</p>
 
-          <pv-button
-              :label="t('card.viewProfile')"
-              @click="goToProfile"
-              class="profile-button"
-          />
-        </div>
-      </div>
-    </template>
-  </pv-card>
+      <button class="profile_button" @click="goToProfile">{{ t('card.viewProfile') }}</button>
+    </div>
+  </article>
 </template>
 
 <style scoped>
-.technician-card {
+.technician_card {
+  display: flex;
   max-width: 850px;
-  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
-
-
-.technician-name {
+.technician_name {
   margin: 0 0 0.50rem 0;
   text-align: left;
-  font-size: 1.25rem;
-  font-weight: 600;
 }
-
-.technician-speciality {
+.technician_speciality {
   margin: 0 0 0.50rem 0;
-  color: #666;
+  color: #444;
   text-align: left;
-  font-size: 1rem;
-  font-weight: 500;
 }
-
-.technician-description {
+.technician_description {
   color: #333;
   text-align: justify;
   font-size: 1.0rem;
   margin-bottom: 1rem;
-  line-height: 1.5;
 }
-
-.profile-button {
+.profile_button {
   background-color: #1b9a92;
-  border-color: #1b9a92;
   color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
 }
-
-.profile-button:hover {
+.profile_button:hover {
   background-color: #17817d;
-  border-color: #17817d;
 }
 </style>

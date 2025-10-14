@@ -1,6 +1,6 @@
 export class AuthApi {
     constructor() {
-        this.baseURL = 'http://localhost:3001';
+        this.baseURL = 'http://localhost:3000';
     }
 
     async login(email, password, userType) {
