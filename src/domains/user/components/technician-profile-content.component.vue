@@ -31,7 +31,13 @@ function handleReviewSubmitted(reviewText) {
 <template>
   <div class="page-background">
     <main class="profile-container">
-      <a href="/client/techsearch" class="back-link">&larr; {{ t('profile.backToSearch') }}</a>
+      <pv-button
+          icon="pi pi-arrow-left"
+          :label="t('profile.backToSearch')"
+          link
+          @click="$router.push('/client/techsearch')"
+          class="back-button"
+      />
       <TechnicianProfileCardComponent v-if="technician" :technician="technician" />
       <ReviewsSectionComponent v-if="technician" :reviews="reviews" @review-submitted="handleReviewSubmitted" />
       <div v-else>
@@ -57,10 +63,8 @@ function handleReviewSubmitted(reviewText) {
   box-shadow:0 4px 12px rgba(0,0,0,.1);
   text-align:left
 }
-.back-link{display:inline-block;
+.back-button{
   margin-bottom:1.5rem;
-  color:#555;
-  text-decoration:none;
-  font-weight:700
+  padding: 0;
 }
 </style>

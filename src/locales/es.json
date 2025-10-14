@@ -46,7 +46,18 @@
     "code": "ES"
   },
   "reserva": {
-    "myReservationAgenda": "Mi Agenda de Reservas"
+    "myReservationAgenda": "Mi Agenda de Reservas",
+    "loading": "Cargando reservas...",
+    "error": "Error",
+    "retry": "Intentar Nuevamente",
+    "noReservations": "No se encontraron reservas",
+    "noDateTime": "Fecha/hora no especificada",
+    "client": "Cliente",
+    "noClient": "No especificado",
+    "category": "Categoría",
+    "status": "Estado",
+    "moreDetails": "Más Detalles",
+    "viewDetails": "Ver Detalles"
   },
   "search": {
     "searchMessage": "Encuentra al profesional que necesitas",
@@ -73,6 +84,7 @@
     "clearAllFilters": "Limpiar Todos los Filtros",
     "filtersPending": "Los filtros han sido modificados. Haz clic en 'Buscar' para aplicarlos.",
     "filtersApplied": "filtros aplicados",
-    "allTechniciansShown": "Actualmente se muestran todos los técnicos. Usa los filtros de arriba para refinar tu búsqueda."
+    "allTechniciansShown": "Actualmente se muestran todos los técnicos. Usa los filtros de arriba para refinar tu búsqueda.",
+    "availableSpecialties": "Especialidades disponibles"
   }
 }

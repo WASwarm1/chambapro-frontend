@@ -18,61 +18,69 @@ const goToProfile = () => {
 }
 </script>
 
-
 <template>
-  <article class="techinician_card">
-    <div class="techinician_image">
-      <img :src="technician.image" :alt="t('card.technicianImageAlt')"/>
-    </div>
-    <div class="techinician_info">
-      <header>
-        <h3 class="techinician_name">{{ technician.name }} {{ technician.lastname }}</h3> <br>
-        <h3 class="techinician_speciality">{{ t('card.specialistIn') }} {{ technician.speciality }}</h3>
-      </header>
+  <pv-card class="technician-card">
+    <template #content>
+      <div class="flex gap-3">
+        <div class="technician-info flex-1">
+          <div class="flex justify-content-between align-items-start">
+            <div>
+              <h3 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h3>
+              <h4 class="technician-speciality">{{ t('card.specialistIn') }} {{ technician.speciality }}</h4>
+            </div>
 
-      <p class="techinician_description">{{ technician.description }}</p>
+          </div>
+          <p class="technician-description">{{ technician.description }}</p>
 
-      <button class="profile_button" @click="goToProfile">{{ t('card.viewProfile') }}</button>
-    </div>
-  </article>
+          <pv-button
+              :label="t('card.viewProfile')"
+              @click="goToProfile"
+              class="profile-button"
+          />
+        </div>
+      </div>
+    </template>
+  </pv-card>
 </template>
 
-
 <style scoped>
-.techinician_card {
-  display: flex;
+.technician-card {
   max-width: 850px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  width: 100%;
 }
-.techinician_name {
+
+
+.technician-name {
   margin: 0 0 0.50rem 0;
   text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
-.techinician_speciality {
+
+.technician-speciality {
   margin: 0 0 0.50rem 0;
-  color: #444;
+  color: #666;
   text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
 }
-.techinician_description {
+
+.technician-description {
   color: #333;
   text-align: justify;
   font-size: 1.0rem;
   margin-bottom: 1rem;
+  line-height: 1.5;
 }
-.profile_button {
+
+.profile-button {
   background-color: #1b9a92;
-  color: black;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background-color 0.2s;
+  border-color: #1b9a92;
+  color: white;
 }
-.profile_button:hover {
+
+.profile-button:hover {
   background-color: #17817d;
+  border-color: #17817d;
 }
 </style>

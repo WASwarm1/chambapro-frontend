@@ -1,6 +1,6 @@
 export class Reserve {
     /**
-     * Creates an instance of Reserva.
+     * Creates an instance of Reserve.
      * @param id
      * @param date
      * @param time

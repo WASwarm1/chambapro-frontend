@@ -12,26 +12,28 @@ defineProps({
 </script>
 
 <template>
-  <section class="profile-card">
-    <img :src="technician.avatar" :alt="t('profile.avatarAlt')" class="profile-avatar" />
-    <div class="profile-info">
-      <h1 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h1>
-      <p class="technician-specialty">{{ technician.specialty }}</p>
-      <div v-if="technician.rating" class="technician-rating">
-        <span class="star-icon">★</span>
-        <span>{{ technician.rating }}</span>
-        <span class="reviews-count">({{ technician.reviewsCount }} {{ t('profile.reviews') }})</span>
+  <pv-card class="profile-card">
+    <template #content>
+      <div class="flex align-items-center gap-3">
+        <img :src="technician.avatar" :alt="t('profile.avatarAlt')" class="profile-avatar" />
+        <div class="profile-info">
+          <h1 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h1>
+          <p class="technician-specialty">{{ technician.speciality }}</p>
+          <div v-if="technician.rating" class="technician-rating">
+            <span class="star-icon">★</span>
+            <span>{{ technician.rating }}</span>
+            <span class="reviews-count">({{ technician.reviewsCount }} {{ t('profile.reviews') }})</span>
+          </div>
+          <pv-button :label="t('profile.hireService')" class="primary-button" />
+        </div>
       </div>
-      <button class="primary-button">{{ t('profile.hireService') }}</button>
-    </div>
-  </section>
+    </template>
+  </pv-card>
 </template>
 
 <style scoped>
 .profile-card {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .profile-avatar {
@@ -62,19 +64,13 @@ defineProps({
 }
 
 .primary-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
   background-color: #16a085;
-  color: white;
-  transition: background-color 0.2s;
+  border-color: #16a085;
 }
 
 .primary-button:hover {
   background-color: #117a65;
+  border-color: #117a65;
 }
 
 .star-icon {

@@ -24,6 +24,14 @@ const specialtyMapping = {
   'painting': ['painting', 'pintura', 'pintor']
 }
 
+const specialtyOptions = [
+  { label: t('search.selectSpecialty'), value: '' },
+  { label: t('search.plumbing'), value: 'plumbing' },
+  { label: t('search.electricity'), value: 'electricity' },
+  { label: t('search.carpentry'), value: 'carpentry' },
+  { label: t('search.painting'), value: 'painting' }
+]
+
 async function loadTechnicians() {
   loading.value = true
   error.value = null
@@ -31,8 +39,6 @@ async function loadTechnicians() {
     const data = await api.getAll()
     technicians.value = Array.isArray(data) ? TechnicianAssembler.toEntities(data) : []
     filteredTechnicians.value = [...technicians.value]
-
-    console.log('Loaded technicians:', technicians.value)
   } catch (err) {
     console.error(t('search.loadError'), err)
     error.value = err?.message || String(err)
@@ -54,11 +60,8 @@ function filtrarTecnicos() {
   if (filtroServicio.value) {
     filtered = filtered.filter(tech => {
       const speciality = (tech.speciality || '').toLowerCase().trim()
-
       if (!speciality) return false
-
       const possibleMatches = specialtyMapping[filtroServicio.value] || []
-
       return possibleMatches.some(term => speciality.includes(term.toLowerCase()))
     })
   }
@@ -78,11 +81,6 @@ function filtrarTecnicos() {
   }
 
   filteredTechnicians.value = filtered
-
-  console.log('Filter applied:', {
-    specialtyFilter: filtroServicio.value,
-    results: filteredTechnicians.value.length
-  })
 }
 
 function limpiarFiltros() {
@@ -121,45 +119,49 @@ onMounted(() => {
     <h2>{{ t('search.searchMessage')}}</h2>
 
     <div class="search-filters">
-      <select v-model="filtroServicio" class="input-select">
-        <option value="">{{ t('search.selectSpecialty') }}</option>
-        <option value="plumbing">{{ t('search.plumbing')}}</option>
-        <option value="electricity">{{ t('search.electricity')}}</option>
-        <option value="carpentry">{{ t('search.carpentry')}}</option>
-        <option value="painting">{{ t('search.painting')}}</option>
-      </select>
+      <pv-dropdown
+          v-model="filtroServicio"
+          :options="specialtyOptions"
+          optionLabel="label"
+          optionValue="value"
+          :placeholder="t('search.selectSpecialty')"
+          class="w-full md:w-14rem"
+      />
 
-      <input
+      <pv-input-text
           type="text"
           v-model="searchName"
           :placeholder="t('search.byNameFilter')"
-          class="input-text"
+          class="w-full"
           @keyup.enter="aplicarFiltros"
       />
 
-      <input
+      <pv-input-text
           type="text"
           v-model="searchLastName"
           :placeholder="t('search.byLastNameFilter')"
-          class="input-text"
+          class="w-full"
           @keyup.enter="aplicarFiltros"
       />
 
-      <button class="btn-buscar" @click="aplicarFiltros" :disabled="loading">
-        {{ loading ? t('search.searching') : t('search.searchButton') }}
-      </button>
+      <pv-button
+          :label="loading ? t('search.searching') : t('search.searchButton')"
+          @click="aplicarFiltros"
+          :disabled="loading"
+          class="btn-buscar"
+      />
 
-      <button
-          class="btn-limpiar"
+      <pv-button
+          :label="t('search.clearFilters')"
           @click="limpiarFiltros"
           :disabled="!hasActiveFilters && !filtersApplied"
-      >
-        {{ t('search.clearFilters') }}
-      </button>
+          severity="secondary"
+          class="btn-limpiar"
+      />
     </div>
 
     <div v-if="availableSpecialities.length > 0" class="specialities-info">
-      <p><strong>Especialidades disponibles:</strong> {{ availableSpecialities.join(', ') }}</p>
+      <p><strong>{{ t('search.availableSpecialties') }}:</strong> {{ availableSpecialities.join(', ') }}</p>
     </div>
 
     <div v-if="hasActiveFilters && !filtersApplied" class="filters-pending">
@@ -181,7 +183,7 @@ onMounted(() => {
 
   <div v-else-if="error" class="error-state">
     <p>{{ t('search.error') }}: {{ error }}</p>
-    <button @click="loadTechnicians" class="btn-retry">{{ t('search.retry') }}</button>
+    <pv-button @click="loadTechnicians" :label="t('search.retry')" severity="danger" class="btn-retry" />
   </div>
 
   <div v-else class="tecnicos-grid">
@@ -194,7 +196,7 @@ onMounted(() => {
     <div v-if="noResults" class="no-results-message">
       <h3>{{ t('search.noTechniciansFound') }}</h3>
       <p>{{ t('search.tryDifferentFilters') }}</p>
-      <button @click="limpiarFiltros" class="btn-limpiar">{{ t('search.clearAllFilters') }}</button>
+      <pv-button @click="limpiarFiltros" :label="t('search.clearAllFilters')" severity="secondary" />
     </div>
 
     <div v-if="!filtersApplied && filteredTechnicians.length === technicians.length && technicians.length > 0">
@@ -229,83 +231,14 @@ onMounted(() => {
   align-items: center;
 }
 
-.input-select, .input-text {
-  padding: 0.6rem 1rem;
-  border: 1px solid #ccc;
-  color: black;
-  background-color: #fff;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  flex: 1;
-  min-width: 180px;
-}
-
-.input-select:focus, .input-text:focus {
-  border-color: #20b2aa;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(32, 178, 170, 0.2);
-}
-
 .btn-buscar {
   background-color: #20b2aa;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 600;
-  min-width: 120px;
+  border-color: #20b2aa;
 }
 
-.btn-buscar:hover:not(:disabled) {
+.btn-buscar:hover {
   background-color: #1b9a92;
-  transform: translateY(-1px);
-}
-
-.btn-buscar:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.btn-limpiar {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 600;
-  min-width: 120px;
-}
-
-.btn-limpiar:hover:not(:disabled) {
-  background-color: #5a6268;
-  transform: translateY(-1px);
-}
-
-.btn-limpiar:disabled {
-  background-color: #e9ecef;
-  color: #adb5bd;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.btn-retry {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 0.5rem;
-}
-
-.btn-retry:hover {
-  background-color: #c82333;
+  border-color: #1b9a92;
 }
 
 .tecnicos-grid {
@@ -321,8 +254,8 @@ onMounted(() => {
   padding: 0.75rem;
   background-color: #e7f3ff;
   border-radius: 6px;
-  text-align: center;
   border-left: 4px solid #20b2aa;
+  text-align: center;
 }
 
 .results-info p {
@@ -344,6 +277,20 @@ onMounted(() => {
   margin: 0;
   color: #856404;
   font-size: 0.9rem;
+}
+
+.specialities-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #e7f3ff;
+  border-radius: 6px;
+  border-left: 4px solid #20b2aa;
+}
+
+.specialities-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #495057;
 }
 
 .filters-applied {
@@ -388,32 +335,10 @@ onMounted(() => {
   padding: 1rem;
 }
 
-.specialities-info {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #e7f3ff;
-  border-radius: 6px;
-  border-left: 4px solid #20b2aa;
-}
-
-.specialities-info p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #495057;
-}
-
 @media (max-width: 768px) {
   .search-filters {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .input-select, .input-text {
-    min-width: auto;
-  }
-
-  .btn-buscar, .btn-limpiar {
-    width: 100%;
   }
 }
 </style>
