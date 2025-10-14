@@ -17,6 +17,13 @@ const filtersApplied = ref(false)
 
 const api = new TechnicianApi()
 
+const specialtyMapping = {
+  'plumbing': ['plumbing', 'plomería', 'plomero', 'fontanería', 'fontanero'],
+  'electricity': ['electricity', 'electricidad', 'eléctrico', 'electricista'],
+  'carpentry': ['carpentry', 'carpintería', 'carpintero'],
+  'painting': ['painting', 'pintura', 'pintor']
+}
+
 async function loadTechnicians() {
   loading.value = true
   error.value = null
@@ -24,6 +31,8 @@ async function loadTechnicians() {
     const data = await api.getAll()
     technicians.value = Array.isArray(data) ? TechnicianAssembler.toEntities(data) : []
     filteredTechnicians.value = [...technicians.value]
+
+    console.log('Loaded technicians:', technicians.value)
   } catch (err) {
     console.error(t('search.loadError'), err)
     error.value = err?.message || String(err)
@@ -44,8 +53,13 @@ function filtrarTecnicos() {
 
   if (filtroServicio.value) {
     filtered = filtered.filter(tech => {
-      const specialty = tech.specialty || tech.speciality || ''
-      return specialty.toLowerCase() === filtroServicio.value.toLowerCase()
+      const speciality = (tech.speciality || '').toLowerCase().trim()
+
+      if (!speciality) return false
+
+      const possibleMatches = specialtyMapping[filtroServicio.value] || []
+
+      return possibleMatches.some(term => speciality.includes(term.toLowerCase()))
     })
   }
 
@@ -64,6 +78,11 @@ function filtrarTecnicos() {
   }
 
   filteredTechnicians.value = filtered
+
+  console.log('Filter applied:', {
+    specialtyFilter: filtroServicio.value,
+    results: filteredTechnicians.value.length
+  })
 }
 
 function limpiarFiltros() {
@@ -80,6 +99,16 @@ const noResults = computed(() => {
 
 const hasActiveFilters = computed(() => {
   return filtroServicio.value || searchName.value.trim() || searchLastName.value.trim()
+})
+
+const availableSpecialities = computed(() => {
+  const specialities = new Set()
+  technicians.value.forEach(tech => {
+    if (tech.speciality) {
+      specialities.add(tech.speciality)
+    }
+  })
+  return Array.from(specialities)
 })
 
 onMounted(() => {
@@ -127,6 +156,10 @@ onMounted(() => {
       >
         {{ t('search.clearFilters') }}
       </button>
+    </div>
+
+    <div v-if="availableSpecialities.length > 0" class="specialities-info">
+      <p><strong>Especialidades disponibles:</strong> {{ availableSpecialities.join(', ') }}</p>
     </div>
 
     <div v-if="hasActiveFilters && !filtersApplied" class="filters-pending">
@@ -353,6 +386,20 @@ onMounted(() => {
   color: #6c757d;
   font-style: italic;
   padding: 1rem;
+}
+
+.specialities-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #e7f3ff;
+  border-radius: 6px;
+  border-left: 4px solid #20b2aa;
+}
+
+.specialities-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #495057;
 }
 
 @media (max-width: 768px) {
