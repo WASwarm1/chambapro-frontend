@@ -17,7 +17,14 @@
     "loadError": "Error al cargar los datos del técnico:",
     "notFound": "Técnico no encontrado",
     "newReviewReceived": "Nueva reseña recibida:",
-    "thankYouReview": "¡Gracias por tu reseña!"
+    "thankYouReview": "¡Gracias por tu reseña!",
+    "avatarAlt": "Foto de perfil del técnico",
+    "reviews": "reseñas",
+    "hireService": "Contratar Servicio",
+    "specialty": "Especialidad",
+    "experience": "Experiencia",
+    "rating": "Calificación",
+    "contact": "Contacto"
   },
   "card": {
     "technicianImageAlt": "Imagen del técnico",

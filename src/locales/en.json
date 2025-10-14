@@ -17,7 +17,14 @@
     "loadError": "Error loading technician data:",
     "notFound": "Technician not found",
     "newReviewReceived": "New review received:",
-    "thankYouReview": "Thank you for your review!"
+    "thankYouReview": "Thank you for your review!",
+    "avatarAlt": "Technician profile photo",
+    "reviews": "reviews",
+    "hireService": "Hire Service",
+    "specialty": "Specialty",
+    "experience": "Experience",
+    "rating": "Rating",
+    "contact": "Contact"
   },
   "card": {
     "technicianImageAlt": "Technician image",
