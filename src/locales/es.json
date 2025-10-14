@@ -186,5 +186,21 @@
     "hourlyRate": "Tarifa por Hora",
     "totalCost": "Costo Total",
     "hours": "horas"
+  },
+  "statistics": {
+    "title": "Estadísticas",
+    "refresh": "Actualizar",
+    "loading": "Cargando estadísticas...",
+    "totalIncome": "Ingresos Totales",
+    "averageRating": "Calificación Promedio",
+    "completedServices": "Servicios Completados",
+    "lifetime": "Totales",
+    "fromReviews": "De {count} reseñas",
+    "servicesCompleted": "Servicios Completados",
+    "monthlyIncome": "Ingresos por Mes",
+    "ratingsDistribution": "Distribución de Calificaciones",
+    "servicesByType": "Servicios por Tipo",
+    "noDataTitle": "No Hay Datos Disponibles",
+    "noDataMessage": "Completa tu primer servicio para ver estadísticas aquí."
   }
 }

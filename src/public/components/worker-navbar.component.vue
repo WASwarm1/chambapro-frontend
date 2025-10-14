@@ -10,7 +10,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const menuItems = computed(() => [
-  { icon: BarChart, text: t('menu.stats'), id: 'stats' },
+  { icon: BarChart, text: t('menu.stats'), id: 'stats', path: '/tech/statistics' },
   { icon: Calendar, text: t('menu.agenda'), id: 'agenda', path: '/tech/agenda' },
   { icon: LogOut, text: t('menu.logout'), id: 'logout' }
 ]);
@@ -61,7 +61,6 @@ const handleClick = (item) => {
   transform: translateX(-50%);
   background-color: #F5F5F5;
   box-sizing: border-box;
-  margin-top: 10rem;
 }
 
 .user-info {
@@ -123,7 +122,6 @@ const handleClick = (item) => {
 @media (max-width: 768px) {
   .menu-container {
     padding: 1rem;
-    margin-top: 5rem;
   }
 
   .menu-text {

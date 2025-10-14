@@ -186,5 +186,21 @@
     "hourlyRate": "Hourly Rate",
     "totalCost": "Total Cost",
     "hours": "hours"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "refresh": "Refresh",
+    "loading": "Loading statistics...",
+    "totalIncome": "Total Income",
+    "averageRating": "Average Rating",
+    "completedServices": "Completed Services",
+    "lifetime": "Lifetime",
+    "fromReviews": "From {count} reviews",
+    "servicesCompleted": "Services Completed",
+    "monthlyIncome": "Monthly Income",
+    "ratingsDistribution": "Ratings Distribution",
+    "servicesByType": "Services by Type",
+    "noDataTitle": "No Data Available",
+    "noDataMessage": "Complete your first service to see statistics here."
   }
 }
