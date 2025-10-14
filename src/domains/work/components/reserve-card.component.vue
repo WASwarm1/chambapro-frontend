@@ -1,5 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
 
 const props = defineProps({
   reserva: {
@@ -11,28 +12,109 @@ const props = defineProps({
 
 const { t } = useI18n();
 
-function formatDateTime(date, time) {
+const formattedDateTime = computed(() => {
+  const { date, time } = props.reserva;
   if (!date && !time) return t('reserva.noDateTime');
 
-  const dateStr = date || '';
-  const timeStr = time || '';
+  const dateStr = formatDate(date);
+  const timeStr = formatTime(time);
 
   return `${dateStr}${dateStr && timeStr ? ', ' : ''}${timeStr}`;
+});
+
+const isUpcoming = computed(() => {
+  if (!props.reserva.date) return false;
+
+  const reservationDate = new Date(props.reserva.date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return reservationDate >= today;
+});
+
+const isToday = computed(() => {
+  if (!props.reserva.date) return false;
+
+  const reservationDate = new Date(props.reserva.date);
+  const today = new Date();
+
+  return reservationDate.toDateString() === today.toDateString();
+});
+
+function formatDate(dateString) {
+  if (!dateString) return '';
+
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  } catch {
+    return dateString;
+  }
+}
+
+function formatTime(timeString) {
+  if (!timeString) return '';
+
+  if (timeString.includes(':')) {
+    const [hours, minutes] = timeString.split(':');
+    return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+  }
+
+  return timeString;
+}
+
+function getStatusSeverity(status) {
+  if (!status) return 'info';
+
+  const statusLower = status.toLowerCase();
+  switch (statusLower) {
+    case 'confirmed':
+    case 'confirmada':
+    case 'completed':
+    case 'completado':
+      return 'success';
+    case 'pending':
+    case 'pendiente':
+      return 'warning';
+    case 'cancelled':
+    case 'cancelada':
+    case 'rejected':
+    case 'rechazada':
+      return 'danger';
+    default:
+      return 'info';
+  }
 }
 </script>
 
 <template>
-  <pv-card class="reserva-card" aria-labelledby="reserva-title">
+  <pv-card
+      class="reserva-card"
+      aria-labelledby="reserva-title"
+      :class="{ 'upcoming-reservation': isUpcoming, 'today-reservation': isToday }"
+  >
     <template #header>
       <div class="card-header">
-        <i class="pi pi-calendar mr-2" style="font-size: 1.25rem"></i>
-        <span class="reservation-date">{{ formatDateTime(reserva.date, reserva.time) }}</span>
+        <div class="date-time-container">
+          <i class="pi pi-calendar mr-2" style="font-size: 1.25rem"></i>
+          <span class="reservation-date">{{ formattedDateTime }}</span>
+        </div>
+        <div v-if="isToday" class="today-badge">
+          <pv-tag :value="t('reserva.today')" severity="info" />
+        </div>
+        <div v-else-if="isUpcoming" class="upcoming-badge">
+          <pv-tag :value="t('reserva.upcoming')" severity="success" />
+        </div>
       </div>
     </template>
 
     <template #title>
       <h3 id="reserva-title" class="reserva-title">
-        {{ reserva.description }}
+        {{ reserva.description || t('reserva.noDescription') }}
       </h3>
     </template>
 
@@ -101,16 +183,37 @@ function formatDateTime(date, time) {
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.today-reservation {
+  border-left: 4px solid #007bff;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+}
+
+.upcoming-reservation {
+  border-left: 4px solid #28a745;
+}
+
 .card-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 1.25rem 0;
+}
+
+.date-time-container {
+  display: flex;
+  align-items: center;
   color: #6c757d;
   font-weight: 500;
 }
 
 .reservation-date {
   font-size: 0.9rem;
+}
+
+.today-badge,
+.upcoming-badge {
+  display: flex;
+  align-items: center;
 }
 
 .reserva-title {
@@ -162,33 +265,3 @@ function formatDateTime(date, time) {
   padding: 1rem 1.25rem;
 }
 </style>
-
-<script>
-// Separate script for helper functions
-export default {
-  methods: {
-    getStatusSeverity(status) {
-      if (!status) return 'info';
-
-      const statusLower = status.toLowerCase();
-      switch (statusLower) {
-        case 'confirmed':
-        case 'confirmada':
-        case 'completed':
-        case 'completado':
-          return 'success';
-        case 'pending':
-        case 'pendiente':
-          return 'warning';
-        case 'cancelled':
-        case 'cancelada':
-        case 'rejected':
-        case 'rechazada':
-          return 'danger';
-        default:
-          return 'info';
-      }
-    }
-  }
-}
-</script>

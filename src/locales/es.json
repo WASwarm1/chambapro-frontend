@@ -51,13 +51,18 @@
     "error": "Error",
     "retry": "Intentar Nuevamente",
     "noReservations": "No se encontraron reservas",
+    "createReservation": "Crear Reserva",
+    "reservations": "reservas",
     "noDateTime": "Fecha/hora no especificada",
     "client": "Cliente",
     "noClient": "No especificado",
     "category": "Categoría",
     "status": "Estado",
     "moreDetails": "Más Detalles",
-    "viewDetails": "Ver Detalles"
+    "viewDetails": "Ver Detalles",
+    "today": "Hoy",
+    "upcoming": "Próxima",
+    "noDescription": "Sin descripción"
   },
   "search": {
     "searchMessage": "Encuentra al profesional que necesitas",
