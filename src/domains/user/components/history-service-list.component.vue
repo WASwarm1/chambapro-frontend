@@ -1,3 +1,22 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import HistoryServiceCardComponent from './history-service-card.component.vue'
+import { getTechnicians, getReservations} from "../infrastructure/history-services.api.js";
+import { assembleHistoryServices} from "../infrastructure/history-services.assembler.js";
+
+const { t } = useI18n()
+const services = ref([])
+
+onMounted(async () => {
+  const [technicians, reservations] = await Promise.all([
+    getTechnicians(),
+    getReservations()
+  ])
+  services.value = assembleHistoryServices(reservations, technicians)
+})
+</script>
+
 <template>
   <div class="history-list">
     <h1>{{ t('services.title') }}</h1>
@@ -20,28 +39,9 @@
       </tbody>
     </table>
 
-    <p v-else>Cargando historial...</p>
+    <p v-else>{{ t('history.loading') }}</p>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import HistoryServiceCardComponent from './history-service-card.component.vue'
-import { getTechnicians, getReservations} from "../infrastructure/history-services.api.js";
-import { assembleHistoryServices} from "../infrastructure/history-services.assembler.js";
-
-const { t } = useI18n()
-const services = ref([])
-
-onMounted(async () => {
-  const [technicians, reservations] = await Promise.all([
-    getTechnicians(),
-    getReservations()
-  ])
-  services.value = assembleHistoryServices(reservations, technicians)
-})
-</script>
 
 <style scoped>
 .history-list {

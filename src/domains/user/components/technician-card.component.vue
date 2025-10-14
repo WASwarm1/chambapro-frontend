@@ -1,12 +1,9 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router'
 
-/**
- * TechnicianCardComponent Component
- * Displays information about a technician including image, date, time, description, client, category, and a button to see more details.
- * Props:
- * - technician: Object containing details about the technician (date, time, description, client, category, infoUrl, image)
- */
+const { t } = useI18n();
+const router = useRouter()
 
 const props = defineProps({
   technician: {
@@ -15,8 +12,6 @@ const props = defineProps({
     default: () => ({})
   }
 })
-
-const router = useRouter()
 
 const goToProfile = () => {
   router.push(`/client/profile/${props.technician.id}`)
@@ -27,17 +22,17 @@ const goToProfile = () => {
 <template>
   <article class="techinician_card">
     <div class="techinician_image">
-      <img :src="technician.image" alt="technician-image"/>
+      <img :src="technician.image" :alt="t('card.technicianImageAlt')"/>
     </div>
     <div class="techinician_info">
       <header>
         <h3 class="techinician_name">{{ technician.name }} {{ technician.lastname }}</h3> <br>
-        <h3 class="techinician_speciality">Especialista en {{ technician.speciality }}</h3>
+        <h3 class="techinician_speciality">{{ t('card.specialistIn') }} {{ technician.speciality }}</h3>
       </header>
 
       <p class="techinician_description">{{ technician.description }}</p>
 
-      <button class="profile_button" @click="goToProfile">Ver Perfil</button>
+      <button class="profile_button" @click="goToProfile">{{ t('card.viewProfile') }}</button>
     </div>
   </article>
 </template>

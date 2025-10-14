@@ -17,23 +17,47 @@
     "electricity": "Electricidad",
     "carpentry": "Carpintería",
     "painting": "Pintura",
-    "searchNameFilter": "Buscar por nombre...",
-    "searchLastNameFilter": "Buscar por apellido...",
-    "searchButton": "Buscar"
+    "byNameFilter": "Buscar por nombre...",
+    "byLastNameFilter": "Buscar por apellido...",
+    "searchButton": "Buscar",
+    "selectSpecialty": "Seleccionar especialidad",
+    "loadError": "Error cargando técnicos"
   },
-  "language": {
-    "code": "ES"
+  "profile": {
+    "backToSearch": "Volver a la búsqueda",
+    "loading": "Cargando perfil del técnico...",
+    "loadError": "Error al cargar los datos del técnico:",
+    "newReviewReceived": "Nueva reseña recibida:",
+    "thankYouReview": "¡Gracias por tu reseña!",
+    "avatarAlt": "Foto de perfil del técnico",
+    "reviews": "reseñas",
+    "hireService": "Contratar Servicio"
   },
-  "reserva": {
-    "myReservationAgenda": "Mi Agenda de Reservas"
+  "card": {
+    "technicianImageAlt": "Imagen del técnico",
+    "specialistIn": "Especialista en",
+    "viewProfile": "Ver Perfil"
   },
-  "services.welcome": "Bienvenido, Cliente",
+  "reviews": {
+    "clientReviews": "Reseñas de Clientes",
+    "leaveReview": "Deja tu reseña:",
+    "shareExperience": "Comparte tu experiencia...",
+    "submitReview": "Enviar Reseña"
+  },
   "services": {
     "title": "Mi historial de Servicios",
     "date": "Fecha",
     "technician": "Técnico",
     "cost": "Costo",
     "status": "Estado"
+  },
+  "history": {
+    "loading": "Cargando historial..."
+  },
+  "language": {
+    "code": "ES"
+  },
+  "reserva": {
+    "myReservationAgenda": "Mi Agenda de Reservas"
   }
-
 }

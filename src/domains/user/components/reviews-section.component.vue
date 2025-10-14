@@ -1,10 +1,15 @@
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 defineProps({
   reviews: { type: Array, required: true }
 });
 const emit = defineEmits(['reviewSubmitted']);
 const newReviewText = ref('');
+
 function submitReview() {
   if (!newReviewText.value.trim()) return;
   emit('reviewSubmitted', newReviewText.value);
@@ -16,7 +21,7 @@ function submitReview() {
   <div>
     <hr class="separator" />
     <section class="reviews-section">
-      <h2>Reseñas de Clientes:</h2>
+      <h2>{{ t('reviews.clientReviews') }}</h2>
       <div class="reviews-list">
         <article v-for="review in reviews" :key="review.id" class="review-item">
           <p class="review-author"><strong>{{ review.author }}</strong></p>
@@ -29,10 +34,15 @@ function submitReview() {
     </section>
     <hr class="separator" />
     <section class="new-review-form">
-      <h3>Deja tu reseña:</h3>
+      <h3>{{ t('reviews.leaveReview') }}</h3>
       <form @submit.prevent="submitReview">
-        <textarea v-model="newReviewText" placeholder="Comparte tu experiencia..." rows="4" class="review-textarea"></textarea>
-        <button type="submit" class="secondary-button">Enviar Reseña</button>
+        <textarea
+            v-model="newReviewText"
+            :placeholder="t('reviews.shareExperience')"
+            rows="4"
+            class="review-textarea"
+        ></textarea>
+        <button type="submit" class="secondary-button">{{ t('reviews.submitReview') }}</button>
       </form>
     </section>
   </div>

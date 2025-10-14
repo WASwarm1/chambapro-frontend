@@ -1,44 +1,41 @@
 <script setup>
-/**
- * TechnicianListComponent Component
- * Displays a list of technicians.
- * Uses TecnicoApi to fetch data and TechnicianAssembler to convert DTOs to entities.
- * Includes internationalization support with vue-i18n.
- * Components:
- * - TechnicianCardComponent: Displays individual technician details.
- */
-
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TechnicianCardComponent from './technician-card.component.vue'
 import { TechnicianApi } from '../infrastructure/technician.api.js'
 import { TechnicianAssembler } from '../infrastructure/technician.assembler.js'
 
-
 const { t } = useI18n()
-const technician = ref([])
+const technicians = ref([])
 const loading = ref(false)
 const error = ref(null)
+const filtroServicio = ref('')
+const searchName = ref('')
+const searchLastName = ref('')
 
 const api = new TechnicianApi()
 
-async function loadTechnician() {
+async function loadTechnicians() {
   loading.value = true
   error.value = null
   try {
     const data = await api.getAll()
-    technician.value = Array.isArray(data) ? TechnicianAssembler.toEntities(data) : []
+    technicians.value = Array.isArray(data) ? TechnicianAssembler.toEntities(data) : []
   } catch (err) {
-    console.error('Error cargando técnicos:', err)
+    console.error(t('search.loadError'), err)
     error.value = err?.message || String(err)
   } finally {
     loading.value = false
   }
 }
 
+function filterTechnicians() {
+  // TODO: Implement filtering logic based on filtroServicio, searchName, and searchLastName
+  console.log('Filtering technicians...')
+}
 
 onMounted(() => {
-  loadTechnician()
+  loadTechnicians()
 })
 </script>
 
@@ -49,32 +46,37 @@ onMounted(() => {
 
     <div class="search-filters">
       <select v-model="filtroServicio" class="input-select">
-        <option value="$t('search.plumbing')">{{ t('search.plumbing')}}</option>
-        <option value="$t('search.electricity')">{{ t('search.electricity')}}</option>
-        <option value="$t('search.carpentry')">{{ t('search.carpentry')}}</option>
-        <option value="$t('search.painting')">{{ t('search.painting')}}</option>
+        <option value="">{{ t('search.selectSpecialty') }}</option>
+        <option value="plumbing">{{ t('search.plumbing')}}</option>
+        <option value="electricity">{{ t('search.electricity')}}</option>
+        <option value="carpentry">{{ t('search.carpentry')}}</option>
+        <option value="painting">{{ t('search.painting')}}</option>
       </select>
 
       <input
           type="text"
           v-model="searchName"
-          :placeholder="$t('search.byNameFilter')"
+          :placeholder="t('search.byNameFilter')"
           class="input-text"
       />
 
       <input
           type="text"
           v-model="searchLastName"
-          :placeholder="$t('search.byLastNameFilter')"
+          :placeholder="t('search.byLastNameFilter')"
           class="input-text"
       />
 
-      <button class="btn-buscar" @click="filtrarTecnicos">{{ t('search.searchButton')}}</button>
+      <button class="btn-buscar" @click="filterTechnicians">{{ t('search.searchButton')}}</button>
     </div>
   </div>
 
-  <div class="tecnicos-grid" v-for="tecnico in tecnicos" :key="tecnico.id">
-      <technician-card-component :technician="tecnico"/>
+  <div class="tecnicos-grid">
+    <technician-card-component
+        v-for="technician in technicians"
+        :key="technician.id"
+        :technician="technician"
+    />
   </div>
 </template>
 

@@ -6,7 +6,6 @@ import { TechnicianApi } from '../infrastructure/technician.api.js';
 import TechnicianProfileCardComponent from './technician-profile-card.component.vue';
 import ReviewsSectionComponent from "./reviews-section.component.vue";
 
-
 const { t } = useI18n();
 const route = useRoute();
 const technician = ref(null);
@@ -19,24 +18,24 @@ onMounted(async () => {
       technician.value = await TechnicianApi.getById(technicianId);
     }
   } catch (error) {
-    console.error(`Error al cargar los datos del técnico:`, error);
+    console.error(t('profile.loadError'), error);
   }
 });
 
 function handleReviewSubmitted(reviewText) {
-  console.log('Nueva reseña recibida:', reviewText);
-  alert('¡Gracias por tu reseña!');
+  console.log(t('profile.newReviewReceived'), reviewText);
+  alert(t('profile.thankYouReview'));
 }
 </script>
 
 <template>
   <div class="page-background">
     <main class="profile-container">
-      <a href="/client/techsearch" class="back-link">&larr; Volver a la búsqueda</a>
+      <a href="/client/techsearch" class="back-link">&larr; {{ t('profile.backToSearch') }}</a>
       <TechnicianProfileCardComponent v-if="technician" :technician="technician" />
       <ReviewsSectionComponent v-if="technician" :reviews="reviews" @review-submitted="handleReviewSubmitted" />
       <div v-else>
-        <p>Cargando perfil del técnico...</p>
+        <p>{{ t('profile.loading') }}</p>
       </div>
     </main>
   </div>

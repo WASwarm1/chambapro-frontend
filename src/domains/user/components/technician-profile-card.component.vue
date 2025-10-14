@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 defineProps({
   technician: {
@@ -10,16 +13,16 @@ defineProps({
 
 <template>
   <section class="profile-card">
-    <img :src="technician.avatar" alt="Foto de perfil del técnico" class="profile-avatar" />
+    <img :src="technician.avatar" :alt="t('profile.avatarAlt')" class="profile-avatar" />
     <div class="profile-info">
       <h1 class="technician-name">{{ technician.name }} {{ technician.lastname }}</h1>
-      <p class="technician-specialty">{{ tecnico.specialty }}</p>
+      <p class="technician-specialty">{{ technician.specialty }}</p>
       <div v-if="technician.rating" class="technician-rating">
         <span class="star-icon">★</span>
         <span>{{ technician.rating }}</span>
-        <span class="reviews-count">({{ technician.reviewsCount }} reseñas)</span>
+        <span class="reviews-count">({{ technician.reviewsCount }} {{ t('profile.reviews') }})</span>
       </div>
-      <button class="primary-button">Contratar Servicio</button>
+      <button class="primary-button">{{ t('profile.hireService') }}</button>
     </div>
   </section>
 </template>

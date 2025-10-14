@@ -10,7 +10,6 @@
     "stats": "Statistics",
     "agenda": "Reservation Agenda",
     "logout": "Logout"
-
   },
   "search": {
     "searchMessage": "Found the professional you need",
@@ -20,15 +19,40 @@
     "painting": "Painting",
     "byNameFilter": "Search by name...",
     "byLastNameFilter": "Search by lastname...",
-    "searchButton": "Search"
+    "searchButton": "Search",
+    "selectSpecialty": "Select specialty",
+    "loadError": "Error loading technicians"
   },
-  "services.welcome": "Welcome, Client",
+  "profile": {
+    "backToSearch": "Back to search",
+    "loading": "Loading technician profile...",
+    "loadError": "Error loading technician data:",
+    "newReviewReceived": "New review received:",
+    "thankYouReview": "Thank you for your review!",
+    "avatarAlt": "Technician profile photo",
+    "reviews": "reviews",
+    "hireService": "Hire Service"
+  },
+  "card": {
+    "technicianImageAlt": "Technician image",
+    "specialistIn": "Specialist in",
+    "viewProfile": "View Profile"
+  },
+  "reviews": {
+    "clientReviews": "Customer Reviews",
+    "leaveReview": "Leave your review:",
+    "shareExperience": "Share your experience...",
+    "submitReview": "Submit Review"
+  },
   "services": {
     "title": "My Service History",
     "date": "Date",
     "technician": "Technician",
     "cost": "Cost",
     "status": "Status"
+  },
+  "history": {
+    "loading": "Loading history..."
   },
   "language": {
     "code": "EN"
