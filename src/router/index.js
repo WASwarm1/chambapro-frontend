@@ -9,6 +9,20 @@ const PageNotFound = () => import('../public/pages/page-not-found.component.vue'
 
 const routes = [
     {
+        path: '/',
+        redirect: '/client/auth'
+    },
+    {
+        path: '/client/auth',
+        name: 'client-auth',
+        component: () => import('../domains/iam/pages/client-auth-page.vue')
+    },
+    {
+        path: '/tech/auth',
+        name: 'technician-auth',
+        component: () => import('../domains/iam/pages/technician-auth-page.vue')
+    },
+    {
         path: '/tech/agenda',
         name: 'AgendaDeReservas',
         component: AgendaDeReservasPage

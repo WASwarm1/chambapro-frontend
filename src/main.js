@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import PrimeVue from 'primevue/config';
@@ -16,6 +17,7 @@ import Textarea from "primevue/textarea";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Tag from "primevue/tag";
+import Password from "primevue/password";
 
 import Aura from '@primeuix/themes/aura';
 
@@ -28,11 +30,15 @@ const i18n = createI18n({
     messages: {
         es,
         en
-    }
+    },
+    globalInjection: true,
+    allowComposition: true
 })
 
 const app = createApp(App)
+const pinia = createPinia()
 
+app.use(pinia)
 app.use(PrimeVue, {
     theme: {
         preset: Aura,
@@ -53,6 +59,7 @@ app.component('pv-textarea', Textarea)
 app.component('pv-data-table', DataTable)
 app.component('pv-column', Column)
 app.component('pv-tag', Tag)
+app.component('pv-password', Password)
 
 app.mount('#app')
 
