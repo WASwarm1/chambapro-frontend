@@ -25,7 +25,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* Estos estilos son específicos para esta tarjeta y no afectarán a otros componentes */
 .profile-card {
   display: flex;
   align-items: center;
