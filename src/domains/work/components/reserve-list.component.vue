@@ -81,11 +81,6 @@ onMounted(async () => {
         <div v-else class="empty-state">
           <i class="pi pi-calendar" style="font-size: 2rem"></i>
           <p>{{ t('reserva.noReservations') }}</p>
-          <pv-button
-              :label="t('reserva.createReservation')"
-              icon="pi pi-plus"
-              class="mt-2"
-          />
         </div>
       </template>
     </pv-card>
