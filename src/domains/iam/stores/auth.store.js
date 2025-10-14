@@ -5,7 +5,7 @@ import { AuthApi } from '../infrastructure/auth.api.js';
 export const useAuthStore = defineStore('auth', () => {
     const user = ref(null);
     const token = ref(localStorage.getItem('auth_token'));
-    const userType = ref(localStorage.getItem('user_type')); // 'client' or 'technician'
+    const userType = ref(localStorage.getItem('user_type'));
     const loading = ref(false);
     const error = ref(null);
 
@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
     const isAuthenticated = computed(() => !!token.value && !!user.value);
     const isClient = computed(() => userType.value === 'client');
     const isTechnician = computed(() => userType.value === 'technician');
+    const currentUser = computed(() => user.value);
 
     async function login(email, password, type) {
         loading.value = true;
@@ -87,6 +88,11 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    function updateUser(updatedUser) {
+        user.value = { ...user.value, ...updatedUser };
+        localStorage.setItem('user_data', JSON.stringify(user.value));
+    }
+
     return {
         user,
         token,
@@ -96,10 +102,11 @@ export const useAuthStore = defineStore('auth', () => {
         isAuthenticated,
         isClient,
         isTechnician,
+        currentUser,
         login,
         register,
         logout,
-        initialize
+        initialize,
+        updateUser
     };
-
 });

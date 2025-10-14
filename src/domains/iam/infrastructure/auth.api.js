@@ -1,55 +1,102 @@
 export class AuthApi {
     constructor() {
-        this.baseURL = 'http://localhost:3000/api';
+        this.baseURL = 'http://localhost:3001';
     }
 
     async login(email, password, userType) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                if (email && password) {
-                    resolve({
-                        success: true,
-                        token: 'mock_jwt_token_' + Math.random().toString(36),
-                        user: {
-                            id: userType === 'client' ? 'client_1' : 'tech_1',
-                            email: email,
-                            name: userType === 'client' ? 'Cliente Ejemplo' : 'Técnico Ejemplo',
-                            type: userType
-                        }
-                    });
-                } else {
-                    resolve({
-                        success: false,
-                        message: 'Credenciales inválidas'
-                    });
-                }
-            }, 1000);
-        });
+        try {
+            const response = await fetch(`${this.baseURL}/users?email=${email}&type=${userType}`);
+            const users = await response.json();
+
+            if (users.length === 0) {
+                return {
+                    success: false,
+                    message: 'Usuario no encontrado'
+                };
+            }
+
+            const user = users[0];
+
+            if (user.password === password) {
+                const { password: _, ...userWithoutPassword } = user;
+
+                return {
+                    success: true,
+                    token: `jwt_token_${user.id}`,
+                    user: userWithoutPassword
+                };
+            } else {
+                return {
+                    success: false,
+                    message: 'Contraseña incorrecta'
+                };
+            }
+        } catch (error) {
+            return {
+                success: false,
+                message: 'Error de conexión'
+            };
+        }
     }
 
     async register(userData, userType) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                if (userData.email && userData.password) {
-                    resolve({
-                        success: true,
-                        message: 'Usuario registrado exitosamente'
-                    });
-                } else {
-                    resolve({
-                        success: false,
-                        message: 'Datos de registro inválidos'
-                    });
-                }
-            }, 1000);
-        });
-    }
+        try {
+            const checkResponse = await fetch(`${this.baseURL}/users?email=${userData.email}`);
+            const existingUsers = await checkResponse.json();
 
-    async logout() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({ success: true });
-            }, 500);
-        });
+            if (existingUsers.length > 0) {
+                return {
+                    success: false,
+                    message: 'El usuario ya existe'
+                };
+            }
+
+            const newUser = {
+                id: Date.now(),
+                type: userType,
+                email: userData.email,
+                password: userData.password,
+                name: userData.name,
+                lastname: userData.lastname || '',
+                phone: userData.phone || '',
+                avatar: `/avatars/default-${userType}.jpg`,
+                createdAt: new Date().toISOString()
+            };
+
+            if (userType === 'technician') {
+                newUser.speciality = userData.specialty || '';
+                newUser.description = userData.description || '';
+                newUser.experience = userData.experience || '';
+                newUser.rating = 0;
+                newUser.reviewsCount = 0;
+                newUser.hourlyRate = 0;
+                newUser.isAvailable = true;
+            }
+
+            const response = await fetch(`${this.baseURL}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            });
+
+            if (response.ok) {
+                return {
+                    success: true,
+                    message: 'Usuario registrado exitosamente'
+                };
+            } else {
+                return {
+                    success: false,
+                    message: 'Error al registrar usuario'
+                };
+            }
+        } catch (error) {
+            return {
+                success: false,
+                message: 'Error de conexión'
+            };
+        }
     }
 }
