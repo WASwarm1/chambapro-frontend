@@ -36,6 +36,12 @@ const minDate = computed(() => {
   return today.toISOString().split('T')[0];
 });
 
+const urgencyOptions = ref([
+  { label: t('hire.urgencyNormal'), value: 'normal' },
+  { label: t('hire.urgencyHigh'), value: 'high' },
+  { label: t('hire.urgencyEmergency'), value: 'emergency' }
+]);
+
 const timeSlots = computed(() => {
   const slots = [];
   for (let hour = 8; hour <= 18; hour++) {
@@ -306,11 +312,10 @@ function goBack() {
                     <pv-dropdown
                         id="urgency"
                         v-model="formData.urgency"
-                        :options="[
-                        { label: t('hire.urgencyNormal'), value: 'normal' },
-                        { label: t('hire.urgencyHigh'), value: 'high' },
-                        { label: t('hire.urgencyEmergency'), value: 'emergency' }
-                      ]"
+                        :options="urgencyOptions"
+                        optionLabel="label"
+                        optionValue="value"
+                        :placeholder="t('hire.selectUrgency')"
                         class="field-input"
                     />
                   </div>
