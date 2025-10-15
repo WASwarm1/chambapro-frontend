@@ -71,30 +71,23 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     console.log(`Navigating from ${from.name} to ${to.name}`);
 
-    // Set page title
     let baseTitle = 'ChambaPro';
     document.title = to.meta.title ? `${baseTitle} | ${to.meta.title}` : baseTitle;
-
-    // Check if route requires authentication
     if (to.meta.requiresAuth) {
         const authStore = useAuthStore();
 
-        // Initialize auth store if token exists in localStorage
         if (!authStore.isAuthenticated && localStorage.getItem('auth_token')) {
             authStore.initialize();
         }
 
         if (!authStore.isAuthenticated) {
-            // Redirect to appropriate login page based on user type requirement
             const loginRoute = to.meta.userType === 'technician' ? '/tech/auth' : '/client/auth';
             console.log('Not authenticated, redirecting to:', loginRoute);
             next(loginRoute);
             return;
         }
 
-        // Check if user has correct user type for the route
         if (to.meta.userType && authStore.userType !== to.meta.userType) {
-            // Redirect to appropriate default page based on user type
             const defaultRoute = authStore.isClient ? '/client/techsearch' : '/tech/agenda';
             console.log('Wrong user type, redirecting to:', defaultRoute);
             next(defaultRoute);
