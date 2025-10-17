@@ -2,7 +2,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '../../iam/stores/auth.store.js';
-import { ReserveApi } from '../../work/infrastructure/reserve.api.js';
+import { ReserveApi } from '../../service/infrastructure/reserve.api.js';
 import { ReviewsApi } from '../../user/infrastructure/reviews.api.js';
 
 import MonthlyIncomeChart from '../components/monthly-income-chart.component.vue';

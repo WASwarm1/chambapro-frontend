@@ -21,7 +21,7 @@ const routes = [
     {
         path: '/tech/agenda',
         name: 'AgendaDeReservas',
-        component: () => import('../domains/work/pages/reservation-agenda-page.vue'),
+        component: () => import('../domains/service/pages/reservation-agenda-page.vue'),
         meta: { title: 'Reservation Agenda', requiresAuth: true, userType: 'technician' }
     },
     {
@@ -52,7 +52,7 @@ const routes = [
     {
         path: '/client/hire/:id',
         name: 'hire-technician',
-        component: () => import('../domains/work/pages/hire-technician-page.vue'),
+        component: () => import('../domains/service/pages/hire-technician-page.vue'),
         meta: { title: 'Hire Technician', requiresAuth: true, userType: 'client' }
     },
     {
