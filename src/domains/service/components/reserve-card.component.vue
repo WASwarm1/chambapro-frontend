@@ -25,20 +25,20 @@ const formattedDateTime = computed(() => {
 const isUpcoming = computed(() => {
   if (!props.reserve.date) return false;
 
-  const reservetionDate = new Date(props.reserve.date);
+  const reservationDate = new Date(props.reserve.date);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  return reservetionDate >= today;
+  return reservationDate >= today;
 });
 
 const isToday = computed(() => {
   if (!props.reserve.date) return false;
 
-  const reservetionDate = new Date(props.reserve.date);
+  const reservationDate = new Date(props.reserve.date);
   const today = new Date();
 
-  return reservetionDate.toDateString() === today.toDateString();
+  return reservationDate.toDateString() === today.toDateString();
 });
 
 function formatDate(dateString) {
@@ -95,13 +95,13 @@ function getStatusSeverity(status) {
   <pv-card
       class="reserve-card"
       aria-labelledby="reserve-title"
-      :class="{ 'upcoming-reservetion': isUpcoming, 'today-reservetion': isToday }"
+      :class="{ 'upcoming-reservation': isUpcoming, 'today-reservation': isToday }"
   >
     <template #header>
       <div class="card-header">
         <div class="date-time-container">
           <i class="pi pi-calendar mr-2" style="font-size: 1.25rem"></i>
-          <span class="reservetion-date">{{ formattedDateTime }}</span>
+          <span class="reservation-date">{{ formattedDateTime }}</span>
         </div>
         <div v-if="isToday" class="today-badge">
           <pv-tag :value="t('reserve.today')" severity="info" />
@@ -183,12 +183,12 @@ function getStatusSeverity(status) {
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.today-reservetion {
+.today-reservation {
   border-left: 4px solid #007bff;
   background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
 }
 
-.upcoming-reservetion {
+.upcoming-reservation {
   border-left: 4px solid #28a745;
 }
 
@@ -206,7 +206,7 @@ function getStatusSeverity(status) {
   font-weight: 500;
 }
 
-.reservetion-date {
+.reservation-date {
   font-size: 0.9rem;
 }
 
