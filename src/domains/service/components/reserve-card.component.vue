@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 
 const props = defineProps({
-  reserva: {
+  reserve: {
     type: Object,
     required: true,
     default: () => ({})
@@ -13,8 +13,8 @@ const props = defineProps({
 const { t } = useI18n();
 
 const formattedDateTime = computed(() => {
-  const { date, time } = props.reserva;
-  if (!date && !time) return t('reserva.noDateTime');
+  const { date, time } = props.reserve;
+  if (!date && !time) return t('reserve.noDateTime');
 
   const dateStr = formatDate(date);
   const timeStr = formatTime(time);
@@ -23,22 +23,22 @@ const formattedDateTime = computed(() => {
 });
 
 const isUpcoming = computed(() => {
-  if (!props.reserva.date) return false;
+  if (!props.reserve.date) return false;
 
-  const reservationDate = new Date(props.reserva.date);
+  const reservetionDate = new Date(props.reserve.date);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  return reservationDate >= today;
+  return reservetionDate >= today;
 });
 
 const isToday = computed(() => {
-  if (!props.reserva.date) return false;
+  if (!props.reserve.date) return false;
 
-  const reservationDate = new Date(props.reserva.date);
+  const reservetionDate = new Date(props.reserve.date);
   const today = new Date();
 
-  return reservationDate.toDateString() === today.toDateString();
+  return reservetionDate.toDateString() === today.toDateString();
 });
 
 function formatDate(dateString) {
@@ -93,49 +93,49 @@ function getStatusSeverity(status) {
 
 <template>
   <pv-card
-      class="reserva-card"
-      aria-labelledby="reserva-title"
-      :class="{ 'upcoming-reservation': isUpcoming, 'today-reservation': isToday }"
+      class="reserve-card"
+      aria-labelledby="reserve-title"
+      :class="{ 'upcoming-reservetion': isUpcoming, 'today-reservetion': isToday }"
   >
     <template #header>
       <div class="card-header">
         <div class="date-time-container">
           <i class="pi pi-calendar mr-2" style="font-size: 1.25rem"></i>
-          <span class="reservation-date">{{ formattedDateTime }}</span>
+          <span class="reservetion-date">{{ formattedDateTime }}</span>
         </div>
         <div v-if="isToday" class="today-badge">
-          <pv-tag :value="t('reserva.today')" severity="info" />
+          <pv-tag :value="t('reserve.today')" severity="info" />
         </div>
         <div v-else-if="isUpcoming" class="upcoming-badge">
-          <pv-tag :value="t('reserva.upcoming')" severity="success" />
+          <pv-tag :value="t('reserve.upcoming')" severity="success" />
         </div>
       </div>
     </template>
 
     <template #title>
-      <h3 id="reserva-title" class="reserva-title">
-        {{ reserva.description || t('reserva.noDescription') }}
+      <h3 id="reserve-title" class="reserve-title">
+        {{ reserve.description || t('reserve.noDescription') }}
       </h3>
     </template>
 
     <template #content>
-      <div class="reserva-details">
+      <div class="reserve-details">
         <div class="detail-item">
           <i class="pi pi-user mr-2"></i>
-          <span><strong>{{ t('reserva.client') }}:</strong> {{ reserva.client || t('reserva.noClient') }}</span>
+          <span><strong>{{ t('reserve.client') }}:</strong> {{ reserve.client || t('reserve.noClient') }}</span>
         </div>
 
-        <div v-if="reserva.category" class="detail-item">
+        <div v-if="reserve.category" class="detail-item">
           <i class="pi pi-tag mr-2"></i>
-          <span><strong>{{ t('reserva.category') }}:</strong> {{ reserva.category }}</span>
+          <span><strong>{{ t('reserve.category') }}:</strong> {{ reserve.category }}</span>
         </div>
 
-        <div v-if="reserva.status" class="detail-item">
+        <div v-if="reserve.status" class="detail-item">
           <i class="pi pi-info-circle mr-2"></i>
-          <span><strong>{{ t('reserva.status') }}:</strong> </span>
+          <span><strong>{{ t('reserve.status') }}:</strong> </span>
           <pv-tag
-              :value="reserva.status"
-              :severity="getStatusSeverity(reserva.status)"
+              :value="reserve.status"
+              :severity="getStatusSeverity(reserve.status)"
               class="ml-2"
           />
         </div>
@@ -145,16 +145,16 @@ function getStatusSeverity(status) {
     <template #footer>
       <div class="card-footer">
         <pv-button
-            v-if="reserva.infoUrl"
-            :label="t('reserva.moreDetails')"
+            v-if="reserve.infoUrl"
+            :label="t('reserve.moreDetails')"
             icon="pi pi-external-link"
             severity="secondary"
-            @click="$router.push(reserva.infoUrl)"
+            @click="$router.push(reserve.infoUrl)"
             class="details-button"
         />
         <pv-button
             v-else
-            :label="t('reserva.viewDetails')"
+            :label="t('reserve.viewDetails')"
             icon="pi pi-eye"
             severity="secondary"
             outlined
@@ -166,7 +166,7 @@ function getStatusSeverity(status) {
 </template>
 
 <style scoped>
-.reserva-card {
+.reserve-card {
   margin: 0;
   border-radius: 12px;
   overflow: hidden;
@@ -178,17 +178,17 @@ function getStatusSeverity(status) {
   flex-direction: column;
 }
 
-.reserva-card:hover {
+.reserve-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.today-reservation {
+.today-reservetion {
   border-left: 4px solid #007bff;
   background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
 }
 
-.upcoming-reservation {
+.upcoming-reservetion {
   border-left: 4px solid #28a745;
 }
 
@@ -206,7 +206,7 @@ function getStatusSeverity(status) {
   font-weight: 500;
 }
 
-.reservation-date {
+.reservetion-date {
   font-size: 0.9rem;
 }
 
@@ -216,7 +216,7 @@ function getStatusSeverity(status) {
   align-items: center;
 }
 
-.reserva-title {
+.reserve-title {
   font-size: 1.1rem;
   font-weight: 600;
   color: #2c3e50;
@@ -225,7 +225,7 @@ function getStatusSeverity(status) {
   text-align: left;
 }
 
-.reserva-details {
+.reserve-details {
   padding: 0.5rem 0;
 }
 

@@ -6,13 +6,13 @@ import { ReserveApi } from '../infrastructure/reserve.api.js';
 import { ReserveAssembler } from '../infrastructure/reserve.assembler.js';
 
 const { t } = useI18n();
-const reservas = ref([]);
+const reservations = ref([]);
 const loading = ref(false);
 const error = ref(null);
 const api = new ReserveApi();
 
-const reservasOrdenadas = computed(() => {
-  return [...reservas.value].sort((a, b) => {
+const sortedReserves = computed(() => {
+  return [...reservations.value].sort((a, b) => {
     const dateComparison = new Date(a.date) - new Date(b.date);
     if (dateComparison !== 0) return dateComparison;
 
@@ -28,7 +28,7 @@ onMounted(async () => {
   loading.value = true;
   try {
     const dtos = await api.getAll();
-    reservas.value = ReserveAssembler.toEntities(dtos);
+    reservations.value = ReserveAssembler.toEntities(dtos);
   } catch (err) {
     console.error('Error loading reservations:', err);
     error.value = err.message;
@@ -39,48 +39,48 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section aria-labelledby="my-reservations-title" class="reserva-list-section">
+  <section aria-labelledby="my-reservations-title" class="reserve-list-section">
     <pv-card>
       <template #title>
         <div class="section-header">
           <h2 id="my-reservations-title" class="section-title">
-            {{ t('reserva.myReservationAgenda') }}
+            {{ t('reserve.myReservationAgenda') }}
           </h2>
-          <div v-if="reservas.length > 0" class="reservation-count">
-            <pv-tag :value="`${reservas.length} ${t('reserva.reservations')}`" severity="info" />
+          <div v-if="reservations.length > 0" class="reservation-count">
+            <pv-tag :value="`${reservations.length} ${t('reserve.reservations')}`" severity="info" />
           </div>
         </div>
       </template>
       <template #content>
         <div v-if="loading" class="loading-state">
           <i class="pi pi-spinner pi-spin" style="font-size: 2rem"></i>
-          <p>{{ t('reserva.loading') }}</p>
+          <p>{{ t('reserve.loading') }}</p>
         </div>
 
         <div v-else-if="error" class="error-state">
           <i class="pi pi-exclamation-triangle" style="font-size: 2rem"></i>
-          <p>{{ t('reserva.error') }}: {{ error }}</p>
+          <p>{{ t('reserve.error') }}: {{ error }}</p>
           <pv-button
               @click="$router.go(0)"
-              :label="t('reserva.retry')"
+              :label="t('reserve.retry')"
               severity="secondary"
               class="mt-2"
           />
         </div>
 
-        <div v-else-if="reservasOrdenadas.length > 0" class="reservas-container">
-          <div class="reservas-grid">
+        <div v-else-if="sortedReserves.length > 0" class="reservations-container">
+          <div class="reservations-grid">
             <reserve-card-component
-                v-for="reserva in reservasOrdenadas"
-                :key="reserva.id"
-                :reserva="reserva"
+                v-for="reserve in sortedReserves"
+                :key="reserve.id"
+                :reserve="reserve"
             />
           </div>
         </div>
 
         <div v-else class="empty-state">
           <i class="pi pi-calendar" style="font-size: 2rem"></i>
-          <p>{{ t('reserva.noReservations') }}</p>
+          <p>{{ t('reserve.noReservations') }}</p>
         </div>
       </template>
     </pv-card>
@@ -88,7 +88,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.reserva-list-section {
+.reserve-list-section {
   padding: 2rem;
 }
 
@@ -112,11 +112,11 @@ onMounted(async () => {
   align-items: center;
 }
 
-.reservas-container {
+.reservations-container {
   padding: 1rem 0;
 }
 
-.reservas-grid {
+.reservations-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 1.5rem;
@@ -139,11 +139,11 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
-  .reserva-list-section {
+  .reserve-list-section {
     padding: 1rem;
   }
 
-  .reservas-grid {
+  .reservations-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
