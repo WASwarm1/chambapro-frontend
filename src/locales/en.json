@@ -69,7 +69,7 @@
   "language": {
     "code": "EN"
   },
-  "reserva": {
+  "reserve": {
     "myReservationAgenda": "My Reservation Agenda",
     "loading": "Loading reservations...",
     "error": "Error",
