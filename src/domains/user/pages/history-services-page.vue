@@ -1,10 +1,10 @@
 <script setup>
 import HistoryServiceListComponent from "../components/history-service-list.component.vue"
-import ClienteNavbar from "../../../public/components/cliente-navbar.component.vue"
+import ClientNavbarComponent from "../../../public/components/client-navbar.component.vue"
 </script>
 
 <template>
-  <ClienteNavbar/>
+  <ClientNavbarComponent/>
   <HistoryServiceListComponent/>
 </template>
 

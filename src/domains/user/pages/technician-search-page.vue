@@ -1,13 +1,13 @@
 <script setup>
 
 import TechnicianListComponent from '../components/technician-list.component.vue'
-import ClienteNavbar from '../../../public/components/cliente-navbar.component.vue'
+import ClientNavbarComponent from '../../../public/components/client-navbar.component.vue'
 
 </script>
 
 <template>
   <header>
-    <ClienteNavbar/>
+    <ClientNavbarComponent/>
   </header>
 
   <TechnicianListComponent/>
