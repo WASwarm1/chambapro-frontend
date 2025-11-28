@@ -151,7 +151,7 @@ function getStatusSeverity(status) {
           <pv-button
               :label="t('history.findTechnicians')"
               icon="pi pi-search"
-              @click="$router.push('/client/techsearch')"
+              @click="$router.push('/client/tech-search')"
               class="mt-2"
           />
         </div>

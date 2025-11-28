@@ -48,7 +48,7 @@ function handleReviewSubmitted(reviewText) {
 <template>
   <div class="page-background">
     <main class="profile-container">
-      <a href="/client/techsearch" class="back-link">&larr; {{ t('profile.backToSearch') }}</a>
+      <a href="/client/tech-search" class="back-link">&larr; {{ t('profile.backToSearch') }}</a>
 
       <div v-if="loading" class="loading-state">
         <p>{{ t('profile.loading') }}</p>
