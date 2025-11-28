@@ -7,10 +7,7 @@ import LanguageSwitcher from '../components/language-switcher.component.vue'
     <div class="header-content">
       <div class="brand-section">
         <div class="icon-wrapper">
-          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
+          <img src="../../assets/chambapro-logo.png" alt="ChambaPro logo" />
         </div>
         <span class="brand-text">ChambaPro</span>
       </div>
@@ -56,10 +53,10 @@ import LanguageSwitcher from '../components/language-switcher.component.vue'
   justify-content: center;
 }
 
-.brand-icon {
-  width: 32px;
-  height: 32px;
-  color: #ffffff;
+.icon-wrapper img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
 }
 
 .brand-text {
