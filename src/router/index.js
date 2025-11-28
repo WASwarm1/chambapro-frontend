@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: '/tech/agenda',
-        name: 'AgendaDeReservas',
+        name: 'reservation-agenda',
         component: () => import('../domains/service/pages/reservation-agenda-page.vue'),
         meta: { title: 'Reservation Agenda', requiresAuth: true, userType: 'technician' }
     },
@@ -32,19 +32,19 @@ const routes = [
     },
     {
         path: '/client/history',
-        name: 'HistoryService',
+        name: 'history-service',
         component: () => import('../domains/user/pages/history-services-page.vue'),
         meta: { title: 'Service History', requiresAuth: true, userType: 'client' }
     },
     {
-        path: '/client/techsearch',
-        name: 'TechnicianSearch',
+        path: '/client/tech-search',
+        name: 'technician-search',
         component: () => import('../domains/user/pages/technician-search-page.vue'),
         meta: { title: 'Find Technicians', requiresAuth: true, userType: 'client' }
     },
     {
         path: '/client/profile/:id',
-        name: 'TechnicianProfile',
+        name: 'technician-profile',
         component: () => import('../domains/user/pages/technician-profile-page.vue'),
         props: true,
         meta: { title: 'Technician Profile', requiresAuth: true, userType: 'client' }
@@ -57,7 +57,7 @@ const routes = [
     },
     {
         path: '/:pathMatch(.*)*',
-        name: 'PageNotFound',
+        name: 'page-not-found',
         component: () => import('../public/pages/page-not-found.component.vue'),
         meta: { title: 'Page Not Found' }
     }
@@ -88,7 +88,7 @@ router.beforeEach((to, from, next) => {
         }
 
         if (to.meta.userType && authStore.userType !== to.meta.userType) {
-            const defaultRoute = authStore.isClient ? '/client/techsearch' : '/tech/agenda';
+            const defaultRoute = authStore.isClient ? '/client/tech-search' : '/tech/agenda';
             console.log('Wrong user type, redirecting to:', defaultRoute);
             next(defaultRoute);
             return;
