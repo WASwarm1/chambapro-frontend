@@ -161,7 +161,7 @@ function refreshStatistics() {
 </script>
 
 <template>
-  <worker-navbar/>
+  <technician-navbar-component/>
   <div class="statistics-page">
     <div class="page-header">
       <h1>{{ t('statistics.title') }}</h1>
