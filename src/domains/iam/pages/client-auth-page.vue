@@ -34,7 +34,7 @@ async function handleSubmit() {
   if (isLogin.value) {
     const result = await authStore.login(formData.value.email, formData.value.password, 'client');
     if (result.success) {
-      router.push('/client/techsearch');
+      router.push('/client/tech-search');
     }
   } else {
     if (formData.value.password !== formData.value.confirmPassword) {
@@ -44,7 +44,7 @@ async function handleSubmit() {
 
     const result = await authStore.register(formData.value, 'client');
     if (result.success) {
-      router.push('/client/techsearch');
+      router.push('/client/tech-search');
     }
   }
 }
