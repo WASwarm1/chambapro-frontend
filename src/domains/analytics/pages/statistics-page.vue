@@ -9,7 +9,7 @@ import MonthlyIncomeChart from '../components/monthly-income-chart.component.vue
 import RatingsChart from '../components/ratings-chart.component.vue';
 import ServicesChart from '../components/services-chart.component.vue';
 
-import WorkerNavbar from '../../../public/components/worker-navbar.component.vue';
+import TechnicianNavbarComponent from '../../../public/components/technician-navbar.component.vue';
 
 const { t } = useI18n();
 const authStore = useAuthStore();
