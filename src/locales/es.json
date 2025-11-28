@@ -4,6 +4,7 @@
     "signOut": "Cerrar Sesión"
   },
   "menu": {
+    "hello": "Hola",
     "bookingSchedule": "Agenda de Reservas",
     "searchTechnicians": "Buscar Técnicos",
     "serviceHistory": "Historial de Servicios",

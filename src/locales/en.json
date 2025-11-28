@@ -4,6 +4,7 @@
     "signOut": "Sign Out"
   },
   "menu": {
+    "hello": "Hello",
     "bookingSchedule": "Booking Schedule",
     "searchTechnicians": "Search Technicians",
     "serviceHistory": "Service History",
