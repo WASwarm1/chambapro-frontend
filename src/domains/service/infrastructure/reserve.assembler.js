@@ -16,10 +16,11 @@ export class ReserveAssembler {
             dto.clientName,
             dto.category,
             dto.status || 'Pending',
-            dto.technicianId || null
+            dto.technicianId || null,
+            dto.clientId || null,
+            dto.categoryId || dto.category
         );
     }
-
 
     static toEntities(dtos) {
         return dtos.map((dto) => this.toEntity(dto));

@@ -141,6 +141,7 @@ async function cancelReservation() {
   }
 }
 
+
 async function acceptReservation() {
   if (!canAcceptReservation.value) return;
 
@@ -148,7 +149,14 @@ async function acceptReservation() {
 
   updating.value = true;
   try {
+    // Send complete reservation object with updated fields
     await reservationApi.updateReservation(reservation.value.id, {
+      id: reservation.value.id,
+      date: reservation.value.date,
+      time: reservation.value.time,
+      description: reservation.value.description,
+      clientId: reservation.value.clientId,
+      categoryId: reservation.value.category,
       status: 'Assigned',
       technicianId: authStore.user.id
     });
@@ -170,8 +178,16 @@ async function completeReservation() {
 
   updating.value = true;
   try {
+    // Send complete reservation object with updated status
     await reservationApi.updateReservation(reservation.value.id, {
-      status: 'Completed'
+      id: reservation.value.id,
+      date: reservation.value.date,
+      time: reservation.value.time,
+      description: reservation.value.description,
+      clientId: reservation.value.clientId,
+      categoryId: reservation.value.category,
+      status: 'Completed',
+      technicianId: reservation.value.technicianId
     });
 
     reservation.value.status = 'Completed';

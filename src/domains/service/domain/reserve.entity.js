@@ -9,8 +9,10 @@ export class Reserve {
      * @param category
      * @param status
      * @param technicianId
+     * @param clientId
+     * @param categoryId
      */
-    constructor(id, date, time, description, client, category, status = 'Pending', technicianId = null) {
+    constructor(id, date, time, description, client, category, status = 'Pending', technicianId = null, clientId = null, categoryId = null) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -19,5 +21,7 @@ export class Reserve {
         this.category = category;
         this.status = status;
         this.technicianId = technicianId;
+        this.clientId = clientId;
+        this.categoryId = categoryId;
     }
 }
