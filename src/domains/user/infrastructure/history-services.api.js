@@ -1,6 +1,6 @@
-export class HistoryServicesApi {
+﻿export class HistoryServicesApi {
     constructor() {
-        this.baseURL = 'http://localhost:3000';
+        this.baseURL = 'https://wa-swarm-2025-20-d3hac9guatdxfyby.brazilsouth-01.azurewebsites.net';
     }
 
     /**
@@ -10,28 +10,38 @@ export class HistoryServicesApi {
      */
     async getServicesByClientId(clientId) {
         try {
-            const servicesResponse = await fetch(`${this.baseURL}/services?clientId=${clientId}`);
+            const servicesResponse = await fetch(`${this.baseURL}/api/v1/services/client/${clientId}`);
             if (!servicesResponse.ok) {
                 throw new Error(`HTTP error! status: ${servicesResponse.status}`);
             }
             let services = await servicesResponse.json();
 
-            const techniciansResponse = await fetch(`${this.baseURL}/users?type=technician`);
-            if (!techniciansResponse.ok) {
-                throw new Error(`HTTP error! status: ${techniciansResponse.status}`);
-            }
-            const technicians = await techniciansResponse.json();
+            // Enrich services with technician data
+            services = await Promise.all(services.map(async (service) => {
+                if (service.technicianId) {
+                    try {
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                        if (technicianResponse.ok) {
+                            const technician = await technicianResponse.json();
+                            return {
+                                ...service,
+                                technician: technician || null,
+                                technicianName: technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado'
+                            };
+                        }
+                    } catch (techError) {
+                        console.warn(`Could not fetch technician ${service.technicianId}:`, techError);
+                    }
+                }
 
-            services = services.map(service => {
-                const technician = technicians.find(tech => tech.id == service.technicianId);
                 return {
                     ...service,
-                    technician: technician || null,
-                    technicianName: technician ? `${technician.name} ${technician.lastname}`.trim() : 'Técnico no especificado'
+                    technician: null,
+                    technicianName: 'Técnico no especificado'
                 };
-            });
+            }));
 
-            return services.sort((a, b) => new Date(b.date) - new Date(a.date));
+            return services.sort((a, b) => new Date(b.serviceDate) - new Date(a.serviceDate));
         } catch (error) {
             console.error('Error fetching services:', error);
             return [];
@@ -44,26 +54,36 @@ export class HistoryServicesApi {
      */
     async getAllServices() {
         try {
-            const servicesResponse = await fetch(`${this.baseURL}/services`);
+            const servicesResponse = await fetch(`${this.baseURL}/api/v1/services`);
             if (!servicesResponse.ok) {
                 throw new Error(`HTTP error! status: ${servicesResponse.status}`);
             }
             let services = await servicesResponse.json();
 
-            const techniciansResponse = await fetch(`${this.baseURL}/users?type=technician`);
-            if (!techniciansResponse.ok) {
-                throw new Error(`HTTP error! status: ${techniciansResponse.status}`);
-            }
-            const technicians = await techniciansResponse.json();
+            // Enrich services with technician data
+            services = await Promise.all(services.map(async (service) => {
+                if (service.technicianId) {
+                    try {
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                        if (technicianResponse.ok) {
+                            const technician = await technicianResponse.json();
+                            return {
+                                ...service,
+                                technician: technician || null,
+                                technicianName: technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado'
+                            };
+                        }
+                    } catch (techError) {
+                        console.warn(`Could not fetch technician ${service.technicianId}:`, techError);
+                    }
+                }
 
-            services = services.map(service => {
-                const technician = technicians.find(tech => tech.id == service.technicianId);
                 return {
                     ...service,
-                    technician: technician || null,
-                    technicianName: technician ? `${technician.name} ${technician.lastname}`.trim() : 'Técnico no especificado'
+                    technician: null,
+                    technicianName: 'Técnico no especificado'
                 };
-            });
+            }));
 
             return services;
         } catch (error) {
@@ -79,18 +99,22 @@ export class HistoryServicesApi {
      */
     async getServiceById(serviceId) {
         try {
-            const response = await fetch(`${this.baseURL}/services/${serviceId}`);
+            const response = await fetch(`${this.baseURL}/api/v1/services/${serviceId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const service = await response.json();
 
             if (service.technicianId) {
-                const technicianResponse = await fetch(`${this.baseURL}/users/${service.technicianId}`);
-                if (technicianResponse.ok) {
-                    const technician = await technicianResponse.json();
-                    service.technician = technician;
-                    service.technicianName = `${technician.name} ${technician.lastname}`.trim();
+                try {
+                    const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                    if (technicianResponse.ok) {
+                        const technician = await technicianResponse.json();
+                        service.technician = technician;
+                        service.technicianName = `${technician.name} ${technician.lastName}`.trim();
+                    }
+                } catch (techError) {
+                    console.warn(`Could not fetch technician for service ${serviceId}:`, techError);
                 }
             }
 

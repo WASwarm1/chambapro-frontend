@@ -1,34 +1,34 @@
-export class AuthApi {
+﻿export class AuthApi {
     constructor() {
-        this.baseURL = 'http://localhost:3000';
+        this.baseURL = 'https://wa-swarm-2025-20-d3hac9guatdxfyby.brazilsouth-01.azurewebsites.net';
     }
 
     async login(email, password, userType) {
         try {
-            const response = await fetch(`${this.baseURL}/users?email=${email}&type=${userType}`);
-            const users = await response.json();
+            const response = await fetch(`${this.baseURL}/api/v1/authentication/sign-in`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    userType: userType
+                })
+            });
 
-            if (users.length === 0) {
-                return {
-                    success: false,
-                    message: 'Usuario no encontrado'
-                };
-            }
-
-            const user = users[0];
-
-            if (user.password === password) {
-                const { password: _, ...userWithoutPassword } = user;
-
+            if (response.ok) {
+                const data = await response.json();
                 return {
                     success: true,
-                    token: `jwt_token_${user.id}`,
-                    user: userWithoutPassword
+                    token: data.token,
+                    user: data.user
                 };
             } else {
+                const errorData = await response.json();
                 return {
                     success: false,
-                    message: 'Contraseña incorrecta'
+                    message: errorData.message || 'Login failed'
                 };
             }
         } catch (error) {
@@ -41,44 +41,29 @@ export class AuthApi {
 
     async register(userData, userType) {
         try {
-            const checkResponse = await fetch(`${this.baseURL}/users?email=${userData.email}`);
-            const existingUsers = await checkResponse.json();
-
-            if (existingUsers.length > 0) {
-                return {
-                    success: false,
-                    message: 'El usuario ya existe'
-                };
-            }
-
-            const newUser = {
-                id: Date.now(),
-                type: userType,
-                email: userData.email,
-                password: userData.password,
+            const requestData = {
                 name: userData.name,
                 lastname: userData.lastname || '',
+                email: userData.email,
+                password: userData.password,
                 phone: userData.phone || '',
-                avatar: `/avatars/default-${userType}.jpg`,
-                createdAt: new Date().toISOString()
+                userType: userType
             };
 
+            // Add technician-specific fields if registering a technician
             if (userType === 'technician') {
-                newUser.speciality = userData.specialty || '';
-                newUser.description = userData.description || '';
-                newUser.experience = userData.experience || '';
-                newUser.rating = 0;
-                newUser.reviewsCount = 0;
-                newUser.hourlyRate = 0;
-                newUser.isAvailable = true;
+                requestData.specialty = userData.specialty || '';
+                requestData.description = userData.description || '';
+                requestData.experience = userData.experience || '';
+                requestData.hourlyRate = userData.hourlyRate || 0;
             }
 
-            const response = await fetch(`${this.baseURL}/users`, {
+            const response = await fetch(`${this.baseURL}/api/v1/authentication/sign-up`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newUser)
+                body: JSON.stringify(requestData)
             });
 
             if (response.ok) {
@@ -87,9 +72,10 @@ export class AuthApi {
                     message: 'Usuario registrado exitosamente'
                 };
             } else {
+                const errorData = await response.json();
                 return {
                     success: false,
-                    message: 'Error al registrar usuario'
+                    message: errorData.message || 'Error al registrar usuario'
                 };
             }
         } catch (error) {

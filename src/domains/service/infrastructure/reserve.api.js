@@ -1,6 +1,6 @@
-export class ReserveApi {
+﻿export class ReserveApi {
     constructor() {
-        this.baseURL = 'http://localhost:3000';
+        this.baseURL = 'https://wa-swarm-2025-20-d3hac9guatdxfyby.brazilsouth-01.azurewebsites.net';
     }
 
     /**
@@ -9,7 +9,7 @@ export class ReserveApi {
      */
     async getAll() {
         try {
-            const response = await fetch(`${this.baseURL}/reservations`);
+            const response = await fetch(`${this.baseURL}/api/v1/reservations`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -27,7 +27,7 @@ export class ReserveApi {
      */
     async getByClientId(clientId) {
         try {
-            const response = await fetch(`${this.baseURL}/reservations?clientId=${clientId}`);
+            const response = await fetch(`${this.baseURL}/api/v1/reservations?clientId=${clientId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -45,7 +45,7 @@ export class ReserveApi {
      */
     async getByTechnicianId(technicianId) {
         try {
-            const response = await fetch(`${this.baseURL}/reservations?technicianId=${technicianId}`);
+            const response = await fetch(`${this.baseURL}/api/v1/reservations?technicianId=${technicianId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -63,22 +63,20 @@ export class ReserveApi {
      */
     async createReservation(reservationData) {
         try {
-            const newReservation = {
-                id: Date.now().toString(),
-                ...reservationData,
-                createdAt: new Date().toISOString()
-            };
-
-            const response = await fetch(`${this.baseURL}/reservations`, {
+            const response = await fetch(`${this.baseURL}/api/v1/reservations`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newReservation)
+                body: JSON.stringify(reservationData)
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                return {
+                    success: false,
+                    message: errorData.message || 'Error creating reservation'
+                };
             }
 
             const createdReservation = await response.json();
@@ -106,7 +104,9 @@ export class ReserveApi {
      */
     async updateReservation(reservationId, updateData) {
         try {
-            const response = await fetch(`${this.baseURL}/reservations/${reservationId}`, {
+            updateData.id = parseInt(reservationId); // Ensure ID is int for backend
+
+            const response = await fetch(`${this.baseURL}/api/v1/reservations/${reservationId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -115,7 +115,11 @@ export class ReserveApi {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                return {
+                    success: false,
+                    message: errorData.message || 'Error updating reservation'
+                };
             }
 
             return {
@@ -139,16 +143,19 @@ export class ReserveApi {
      */
     async cancelReservation(reservationId) {
         try {
-            const response = await fetch(`${this.baseURL}/reservations/${reservationId}`, {
+            const response = await fetch(`${this.baseURL}/api/v1/reservations/${reservationId}/cancel`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ status: 'cancelled' })
+                }
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                return {
+                    success: false,
+                    message: errorData.message || 'Error cancelling reservation'
+                };
             }
 
             return {
