@@ -115,7 +115,7 @@ async function submitHireRequest() {
       technicianName: `${technician.value.name} ${technician.value.lastname}`
     };
 
-    const result = await reservationsApi.createReservation(reservationData);
+    const result = await reserveApi.createReservation(reservationData);
 
     if (result.success) {
       alert(t('hire.successMessage'));

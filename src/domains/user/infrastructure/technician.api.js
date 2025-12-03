@@ -48,7 +48,7 @@
 
             // Fetch reviews if needed
             try {
-                const reviewsResponse = await fetch(`${this.baseURL}/api/reviews/technician/${id}`, {
+                const reviewsResponse = await fetch(`${this.baseURL}/api/v1/reviews/technician/${id}`, {
                     headers: headers
                 });
                 const reviews = await reviewsResponse.json();
