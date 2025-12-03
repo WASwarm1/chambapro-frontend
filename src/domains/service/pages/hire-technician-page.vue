@@ -99,20 +99,11 @@ async function submitHireRequest() {
 
   try {
     const reservationData = {
-      clientId: authStore.user.id,
-      technicianId: technician.value.id,
       date: formData.value.serviceDate,
       time: formData.value.serviceTime,
       description: formData.value.serviceDescription,
-      category: formData.value.serviceType,
-      status: 'pending',
-      estimatedCost: totalCost.value,
-      estimatedDuration: `${formData.value.estimatedHours} ${t('hire.hours')}`,
-      address: formData.value.address,
-      specialInstructions: formData.value.specialInstructions,
-      urgency: formData.value.urgency,
-      clientName: `${authStore.user.name} ${authStore.user.lastname}`,
-      technicianName: `${technician.value.name} ${technician.value.lastname}`
+      clientId: authStore.user.id,
+      categoryId: formData.value.serviceType
     };
 
     const result = await reserveApi.createReservation(reservationData);
