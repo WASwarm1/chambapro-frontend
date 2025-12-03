@@ -8,7 +8,7 @@ export class ReserveAssembler {
      */
 
     static toEntity(dto) {
-        return new Reserve(dto.id, dto.date, dto.time, dto.description, dto.client, dto.category);
+        return new Reserve(dto.id, dto.date, dto.time, dto.description, dto.clientName, dto.category);
     }
 
     static toEntities(dtos) {
