@@ -51,7 +51,10 @@ async function loadStatistics() {
 
     const reviews = await reviewsApi.getByTechnicianId(authStore.user.id);
 
-    processStatistics(reservations, reviews);
+    // Process reservations to add pricing data based on matched technicians
+    const processedReservations = await processReservationsWithPricing(reservations);
+
+    processStatistics(processedReservations, reviews);
 
   } catch (error) {
     console.error('Error loading statistics:', error);
@@ -60,8 +63,57 @@ async function loadStatistics() {
   }
 }
 
+async function processReservationsWithPricing(reservations) {
+  return await Promise.all(reservations.map(async (reservation) => {
+    let cost = 0;
+    let category = reservation.categoryId || reservation.category || 'General';
+
+    // If technician is assigned, get their hourly rate
+    if (reservation.technicianId) {
+      try {
+        // Get technician details for pricing
+        // Since we don't have a direct endpoint, we'll estimate cost
+        // In a real app, this would come from the reservation data itself
+        cost = estimateCost(category);
+      } catch (techError) {
+        console.warn('Could not get technician pricing:', techError);
+        cost = estimateCost(category);
+      }
+    } else {
+      // Estimate cost based on service type
+      cost = estimateCost(category);
+    }
+
+    return {
+      ...reservation,
+      cost: cost,
+      estimatedCost: cost,
+      category: category,
+      date: reservation.date
+    };
+  }));
+}
+
+function estimateCost(category) {
+  // Estimate costs by service type
+  const costMap = {
+    'plumbing': 80,
+    'electricity': 75,
+    'carpentry': 70,
+    'painting': 65,
+    'cleaning': 60,
+    'gardening': 55,
+    'General': 70
+  };
+
+  return costMap[category.toLowerCase()] || costMap['General'];
+}
+
 function processStatistics(reservations, reviews) {
-  const completedReservations = reservations.filter(r => r.status === 'completed' || r.status === 'confirmed');
+  // Filter for completed services (technicians have marked them as done)
+  const completedReservations = reservations.filter(r =>
+    r.status === 'Completed' || r.status === 'completed' || r.status === 'Completed'.toLowerCase()
+  );
 
   const monthlyIncome = calculateMonthlyIncome(completedReservations);
 

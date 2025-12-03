@@ -273,7 +273,7 @@ function goBack() {
 
                 <pv-button
                     v-if="canCompleteReservation"
-                    :label="t('reservation.complete')"
+                    :label="t('reservation.confirmComplete')"
                     icon="pi pi-check-circle"
                     @click="completeReservation"
                     severity="success"

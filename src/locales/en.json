@@ -108,6 +108,7 @@
     "confirm": "Confirm Reservation",
     "cancel": "Cancel Reservation",
     "complete": "Mark as Complete",
+    "confirmComplete": "Confirm Service Completed",
     "updating": "Updating...",
     "acceptedSuccessfully": "Reservation accepted successfully!",
     "confirmedSuccessfully": "Reservation confirmed successfully!",
