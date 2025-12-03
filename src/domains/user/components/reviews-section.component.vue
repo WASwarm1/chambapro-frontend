@@ -42,6 +42,7 @@ async function loadReviews() {
     localReviews.value = await reviewsApi.getByTechnicianId(props.technician.id);
   } catch (error) {
     console.error('Error loading reviews:', error);
+    localReviews.value = []; // Ensure empty array on error
   } finally {
     loading.value = false;
   }

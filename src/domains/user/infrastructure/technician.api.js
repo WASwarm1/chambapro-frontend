@@ -51,6 +51,15 @@
                 const reviewsResponse = await fetch(`${this.baseURL}/api/v1/reviews/technician/${id}`, {
                     headers: headers
                 });
+
+                if (!reviewsResponse.ok) {
+                    console.warn('Reviews endpoint returned', reviewsResponse.status, '- reviews unavailable');
+                    return {
+                        ...technician,
+                        reviews: []
+                    };
+                }
+
                 const reviewsResult = await reviewsResponse.json();
                 // API returns { message: "", data: [] } format
                 const reviewsData = reviewsResult?.data || [];
