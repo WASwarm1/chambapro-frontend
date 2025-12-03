@@ -3,9 +3,19 @@
         this.baseURL = 'https://chambapro-platform-production.up.railway.app';
     }
 
+    getAuthHeaders() {
+        const token = localStorage.getItem('auth_token');
+        return token ? { 'Authorization': `Bearer ${token}` } : {};
+    }
+
     async getAll() {
         try {
-            const response = await fetch(`${this.baseURL}/api/v1/users/technicians`);
+            const headers = {
+                ...this.getAuthHeaders()
+            };
+            const response = await fetch(`${this.baseURL}/api/v1/users/technicians`, {
+                headers: headers
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -19,7 +29,12 @@
 
     async getById(id) {
         try {
-            const response = await fetch(`${this.baseURL}/api/v1/users/${id}`);
+            const headers = {
+                ...this.getAuthHeaders()
+            };
+            const response = await fetch(`${this.baseURL}/api/v1/users/${id}`, {
+                headers: headers
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,7 +48,9 @@
 
             // Fetch reviews if needed
             try {
-                const reviewsResponse = await fetch(`${this.baseURL}/api/reviews/technician/${id}`);
+                const reviewsResponse = await fetch(`${this.baseURL}/api/reviews/technician/${id}`, {
+                    headers: headers
+                });
                 const reviews = await reviewsResponse.json();
                 return {
                     ...technician,
@@ -51,7 +68,12 @@
 
     async getBySpecialty(specialty) {
         try {
-            const response = await fetch(`${this.baseURL}/api/v1/users/technicians/by-speciality/${encodeURIComponent(specialty)}`);
+            const headers = {
+                ...this.getAuthHeaders()
+            };
+            const response = await fetch(`${this.baseURL}/api/v1/users/technicians/by-speciality/${encodeURIComponent(specialty)}`, {
+                headers: headers
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
