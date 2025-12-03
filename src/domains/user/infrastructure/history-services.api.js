@@ -10,38 +10,47 @@
      */
     async getServicesByClientId(clientId) {
         try {
-            const servicesResponse = await fetch(`${this.baseURL}/api/v1/services/client/${clientId}`);
-            if (!servicesResponse.ok) {
-                throw new Error(`HTTP error! status: ${servicesResponse.status}`);
+            // Use reservations API instead of services API
+            const reservationsResponse = await fetch(`${this.baseURL}/api/v1/reservations?clientId=${clientId}`);
+            if (!reservationsResponse.ok) {
+                throw new Error(`HTTP error! status: ${reservationsResponse.status}`);
             }
-            let services = await servicesResponse.json();
+            let reservations = await reservationsResponse.json();
 
-            // Enrich services with technician data
-            services = await Promise.all(services.map(async (service) => {
-                if (service.technicianId) {
+            // Convert reservations to service format and enrich with technician data
+            let services = await Promise.all(reservations.map(async (reservation) => {
+                let technicianName = 'Técnico no especificado';
+                let category = reservation.categoryId;
+
+                if (reservation.technicianId) {
                     try {
-                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`);
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
-                            return {
-                                ...service,
-                                technician: technician || null,
-                                technicianName: technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado'
-                            };
+                            technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado';
+                            category = reservation.categoryId;
                         }
                     } catch (techError) {
-                        console.warn(`Could not fetch technician ${service.technicianId}:`, techError);
+                        console.warn(`Could not fetch technician ${reservation.technicianId}:`, techError);
                     }
                 }
 
+                // Convert reservation to service format expected by frontend
                 return {
-                    ...service,
-                    technician: null,
-                    technicianName: 'Técnico no especificado'
+                    id: reservation.id,
+                    date: reservation.date ? new Date(reservation.date).toLocaleDateString() : reservation.date,
+                    originalDate: reservation.date, // Keep original for sorting
+                    description: reservation.description,
+                    cost: 'S/ 0.00', // Placeholder - could be calculated
+                    status: reservation.status,
+                    technicianName: technicianName,
+                    category: category,
+                    clientId: reservation.clientId,
+                    technicianId: reservation.technicianId
                 };
             }));
 
-            return services.sort((a, b) => new Date(b.serviceDate) - new Date(a.serviceDate));
+            return services.sort((a, b) => new Date(b.originalDate || b.date) - new Date(a.originalDate || a.date));
         } catch (error) {
             console.error('Error fetching services:', error);
             return [];
@@ -49,43 +58,49 @@
     }
 
     /**
-     * Gets all services with technician information (for development/debugging)
+     * Gets all reservations as services (for development/debugging)
      * @returns {Promise<Array>}
      */
     async getAllServices() {
         try {
-            const servicesResponse = await fetch(`${this.baseURL}/api/v1/services`);
-            if (!servicesResponse.ok) {
-                throw new Error(`HTTP error! status: ${servicesResponse.status}`);
+            // Use reservations API for debugging
+            const reservationsResponse = await fetch(`${this.baseURL}/api/v1/reservations`);
+            if (!reservationsResponse.ok) {
+                throw new Error(`HTTP error! status: ${reservationsResponse.status}`);
             }
-            let services = await servicesResponse.json();
+            let reservations = await reservationsResponse.json();
 
-            // Enrich services with technician data
-            services = await Promise.all(services.map(async (service) => {
-                if (service.technicianId) {
+            // Convert reservations to service format
+            let services = await Promise.all(reservations.map(async (reservation) => {
+                let technicianName = 'Técnico no especificado';
+
+                if (reservation.technicianId) {
                     try {
-                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`);
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
-                            return {
-                                ...service,
-                                technician: technician || null,
-                                technicianName: technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado'
-                            };
+                            technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado';
                         }
                     } catch (techError) {
-                        console.warn(`Could not fetch technician ${service.technicianId}:`, techError);
+                        console.warn(`Could not fetch technician ${reservation.technicianId}:`, techError);
                     }
                 }
 
                 return {
-                    ...service,
-                    technician: null,
-                    technicianName: 'Técnico no especificado'
+                    id: reservation.id,
+                    date: reservation.date ? new Date(reservation.date).toLocaleDateString() : reservation.date,
+                    originalDate: reservation.date,
+                    description: reservation.description,
+                    cost: 'S/ 0.00',
+                    status: reservation.status,
+                    technicianName: technicianName,
+                    category: reservation.categoryId,
+                    clientId: reservation.clientId,
+                    technicianId: reservation.technicianId
                 };
             }));
 
-            return services;
+            return services.sort((a, b) => new Date(b.originalDate || b.date) - new Date(a.originalDate || a.date));
         } catch (error) {
             console.error('Error fetching all services:', error);
             return [];

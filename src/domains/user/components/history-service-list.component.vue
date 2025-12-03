@@ -47,7 +47,27 @@ async function loadServices() {
 }
 
 function getStatusSeverity(status) {
-  return HistoryServicesAssembler.getStatusSeverity(status)
+  if (!status) return 'info';
+
+  const statusLower = status.toLowerCase();
+  switch (statusLower) {
+    case 'completed':
+    case 'completado':
+      return 'success';
+    case 'assigned':
+    case 'asignada':
+      return 'info';
+    case 'pending':
+    case 'pendiente':
+      return 'warning';
+    case 'cancelled':
+    case 'cancelada':
+    case 'rejected':
+    case 'rechazada':
+      return 'danger';
+    default:
+      return 'info';
+  }
 }
 </script>
 
