@@ -71,16 +71,35 @@ async function processReservationsWithPricing(reservations) {
     // If technician is assigned, get their hourly rate
     if (reservation.technicianId) {
       try {
-        // Get technician details for pricing
-        // Since we don't have a direct endpoint, we'll estimate cost
-        // In a real app, this would come from the reservation data itself
-        cost = estimateCost(category);
+        // Fetch technician details to get their actual hourly rate
+        const response = await fetch(`https://chambapro-platform-production.up.railway.app/api/v1/users/${reservation.technicianId}`, {
+          headers: {
+            'Authorization': `Bearer ${authStore.token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const technician = await response.json();
+          // Calculate cost using technician's actual hourly rate and estimated hours
+          if (technician.hourlyRate) {
+            const estimatedHours = reservation.estimatedHours || 2; // Default to 2 hours if not specified
+            cost = technician.hourlyRate * estimatedHours;
+          } else {
+            // Fallback to category-based estimate if technician has no hourly rate
+            cost = estimateCost(category);
+          }
+        } else {
+          // Fallback to category-based estimate if technician fetch fails
+          cost = estimateCost(category);
+        }
       } catch (techError) {
         console.warn('Could not get technician pricing:', techError);
+        // Fallback to category-based estimate
         cost = estimateCost(category);
       }
     } else {
-      // Estimate cost based on service type
+      // Estimate cost based on service type when no technician assigned
       cost = estimateCost(category);
     }
 
