@@ -71,6 +71,7 @@ onMounted(async () => {
   await loadReservation();
 });
 
+
 async function loadReservation() {
   loading.value = true;
   error.value = null;
@@ -79,8 +80,10 @@ async function loadReservation() {
     const reservationId = route.params.id;
     if (reservationId) {
       const dto = await reservationApi.getById(reservationId);
+      console.log('Raw DTO from backend:', dto);
       if (dto) {
         reservation.value = ReserveAssembler.toEntity(dto);
+        console.log('Assembled reservation entity:', reservation.value);
       } else {
         error.value = t('reservation.notFound');
       }
@@ -150,16 +153,18 @@ async function acceptReservation() {
   updating.value = true;
   try {
     // Send complete reservation object with updated fields
-    await reservationApi.updateReservation(reservation.value.id, {
+    const updateData = {
       id: reservation.value.id,
       date: reservation.value.date,
       time: reservation.value.time,
       description: reservation.value.description,
       clientId: reservation.value.clientId,
-      categoryId: reservation.value.category,
+      categoryId: reservation.value.categoryId || reservation.value.category,
       status: 'Assigned',
       technicianId: authStore.user.id
-    });
+    };
+    console.log('Sending accept update with data:', updateData);
+    await reservationApi.updateReservation(reservation.value.id, updateData);
 
     reservation.value.status = 'Assigned';
     reservation.value.technicianId = authStore.user.id;
@@ -179,16 +184,18 @@ async function completeReservation() {
   updating.value = true;
   try {
     // Send complete reservation object with updated status
-    await reservationApi.updateReservation(reservation.value.id, {
+    const updateData = {
       id: reservation.value.id,
       date: reservation.value.date,
       time: reservation.value.time,
       description: reservation.value.description,
       clientId: reservation.value.clientId,
-      categoryId: reservation.value.category,
+      categoryId: reservation.value.categoryId || reservation.value.category,
       status: 'Completed',
       technicianId: reservation.value.technicianId
-    });
+    };
+    console.log('Sending complete update with data:', updateData);
+    await reservationApi.updateReservation(reservation.value.id, updateData);
 
     reservation.value.status = 'Completed';
 
