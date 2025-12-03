@@ -5,7 +5,7 @@
 
     async getByTechnicianId(technicianId) {
         try {
-            const response = await fetch(`${this.baseURL}/api/v1/Review/technician/${technicianId}`);
+            const response = await fetch(`${this.baseURL}/api/v1/reviews/technician/${technicianId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -21,7 +21,7 @@
 
     async createReview(reviewData) {
         try {
-            const response = await fetch(`${this.baseURL}/api/v1/Review`, {
+            const response = await fetch(`${this.baseURL}/api/v1/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

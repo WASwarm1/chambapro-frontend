@@ -51,14 +51,20 @@
                 const reviewsResponse = await fetch(`${this.baseURL}/api/v1/reviews/technician/${id}`, {
                     headers: headers
                 });
-                const reviews = await reviewsResponse.json();
+                const reviewsResult = await reviewsResponse.json();
+                // API returns { message: "", data: [] } format
+                const reviewsData = reviewsResult?.data || [];
                 return {
                     ...technician,
-                    reviews: reviews || []
+                    reviews: reviewsData
                 };
             } catch (reviewsError) {
                 // Reviews might not be available, return technician data
-                return technician;
+                console.warn('Could not fetch reviews for technician:', reviewsError);
+                return {
+                    ...technician,
+                    reviews: []
+                };
             }
         } catch (error) {
             console.error('Error fetching technician:', error);
