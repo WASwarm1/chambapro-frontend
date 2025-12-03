@@ -1,6 +1,23 @@
-﻿export class HistoryServicesApi {
+﻿import { useAuthStore } from '../../iam/stores/auth.store.js';
+
+export class HistoryServicesApi {
     constructor() {
         this.baseURL = 'https://chambapro-platform-production.up.railway.app';
+        this.authStore = useAuthStore();
+    }
+
+    /**
+     * Get authorization headers for authenticated requests
+     * @returns {Object} Headers object with Authorization if token exists
+     */
+    getAuthHeaders() {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        if (this.authStore.token) {
+            headers['Authorization'] = `Bearer ${this.authStore.token}`;
+        }
+        return headers;
     }
 
     /**
@@ -25,7 +42,9 @@
 
                 if (reservation.technicianId) {
                     try {
-                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`);
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`, {
+                            headers: this.getAuthHeaders()
+                        });
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
                             technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no encontrado';
@@ -86,7 +105,9 @@
 
                 if (reservation.technicianId) {
                     try {
-                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`);
+                        const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`, {
+                            headers: this.getAuthHeaders()
+                        });
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
                             technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado';
@@ -139,7 +160,9 @@
 
             if (service.technicianId) {
                 try {
-                    const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`);
+                    const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${service.technicianId}`, {
+                        headers: this.getAuthHeaders()
+                    });
                     if (technicianResponse.ok) {
                         const technician = await technicianResponse.json();
                         service.technician = technician;
