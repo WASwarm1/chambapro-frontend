@@ -23,15 +23,16 @@ const formData = ref({
   phone: '',
   specialty: '',
   experience: '',
-  description: ''
+  description: '',
+  hourlyRate: ''
 });
 
 const specialtyOptions = computed(() => [
   { label: t('auth.selectSpecialty'), value: '' },
-  { label: t('search.plumbing'), value: 'plumbing' },
-  { label: t('search.electricity'), value: 'electricity' },
-  { label: t('search.carpentry'), value: 'carpentry' },
-  { label: t('search.painting'), value: 'painting' }
+  { label: t('search.plumbing'), value: 'Plumbing' },
+  { label: t('search.electricity'), value: 'Electrical' },
+  { label: t('search.carpentry'), value: 'Carpentry' },
+  { label: t('search.painting'), value: 'Painting' }
 ]);
 
 async function handleSubmit() {
@@ -65,7 +66,8 @@ function toggleMode() {
     phone: '',
     specialty: '',
     experience: '',
-    description: ''
+    description: '',
+    hourlyRate: ''
   };
 }
 </script>
@@ -201,6 +203,18 @@ function toggleMode() {
                   v-model="formData.description"
                   :placeholder="t('auth.enterDescription')"
                   rows="3"
+                  class="input-field"
+              />
+            </div>
+
+            <div v-if="!isLogin" class="field">
+              <label for="hourlyRate" class="input-label">{{ t('auth.hourlyRate') }}</label>
+              <pv-input-text
+                  id="hourlyRate"
+                  v-model="formData.hourlyRate"
+                  type="number"
+                  :placeholder="t('auth.enterHourlyRate')"
+                  required
                   class="input-field"
               />
             </div>
