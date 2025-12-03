@@ -13,9 +13,9 @@ export class AuthApi {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    userType: userType
+                    Email: email,
+                    Password: password,
+                    UserType: userType
                 })
             });
 
@@ -62,20 +62,20 @@ export class AuthApi {
     async register(userData, userType) {
         try {
             const requestData = {
-                name: userData.name,
-                lastname: userData.lastname || '',
-                email: userData.email,
-                password: userData.password,
-                phone: userData.phone || '',
-                userType: userType
+                Name: userData.name,
+                Lastname: userData.lastname || '',
+                Email: userData.email,
+                Password: userData.password,
+                Phone: userData.phone || '',
+                UserType: userType
             };
 
             // Add technician-specific fields if registering a technician
             if (userType === 'technician') {
-                requestData.specialty = userData.specialty || '';
-                requestData.description = userData.description || '';
-                requestData.experience = userData.experience || '';
-                requestData.hourlyRate = userData.hourlyRate || 0;
+                requestData.Speciality = userData.specialty || ''; // Backend expects Speciality with capital S
+                requestData.Description = userData.description || '';
+                requestData.Experience = userData.experience || '';
+                requestData.HourlyRate = parseFloat(userData.hourlyRate) || 0;
             }
 
             const response = await fetch(`${this.baseURL}/api/v1/authentication/sign-up`, {

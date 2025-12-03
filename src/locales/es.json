@@ -138,6 +138,8 @@
     "specialty": "Especialidad",
     "experience": "Años de Experiencia",
     "description": "Descripción",
+    "hourlyRate": "Tarifa por Hora",
+    "enterHourlyRate": "Ingresa tarifa por hora en soles",
     "enterEmail": "Ingresa tu email",
     "enterPassword": "Ingresa tu contraseña",
     "enterFullName": "Ingresa tu nombre completa",

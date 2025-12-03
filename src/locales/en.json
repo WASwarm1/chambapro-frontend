@@ -138,6 +138,8 @@
     "specialty": "Specialty",
     "experience": "Years of Experience",
     "description": "Description",
+    "hourlyRate": "Hourly Rate",
+    "enterHourlyRate": "Enter hourly rate in soles",
     "enterEmail": "Enter your email",
     "enterPassword": "Enter your password",
     "enterFullName": "Enter your full name",
