@@ -28,27 +28,28 @@ const statusOptions = ref([
 const canAcceptReservation = computed(() => {
   return reservation.value &&
          reservation.value.status === 'Pending' &&
-         reservation.value.technicianId === null &&
+         (reservation.value.technicianId === null || reservation.value.technicianId === undefined) &&
          authStore.isTechnician;
 });
 
 const canConfirmReservation = computed(() => {
   return reservation.value &&
          reservation.value.status === 'Pending' &&
-         reservation.value.technicianId === authStore.user?.id;
+         reservation.value.technicianId != null &&
+         String(reservation.value.technicianId) === String(authStore.user?.id);
 });
 
 const canCancelReservation = computed(() => {
   return reservation.value &&
          reservation.value.status !== 'Completed' &&
          reservation.value.status !== 'Cancelled' &&
-         (reservation.value.technicianId === authStore.user?.id || authStore.isTechnician);
+         (String(reservation.value.technicianId) === String(authStore.user?.id) || authStore.isTechnician);
 });
 
 const canCompleteReservation = computed(() => {
   return reservation.value &&
          reservation.value.status === 'Assigned' &&
-         reservation.value.technicianId === authStore.user?.id;
+         String(reservation.value.technicianId) === String(authStore.user?.id);
 });
 
 const getStatusSeverity = (status) => {
