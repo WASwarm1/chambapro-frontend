@@ -1,4 +1,6 @@
-﻿export class AuthApi {
+﻿import { extractUserFromToken } from '../utils/jwt.util.js';
+
+export class AuthApi {
     constructor() {
         this.baseURL = 'https://chambapro-platform-production.up.railway.app';
     }
@@ -19,12 +21,23 @@
 
             if (response.ok) {
                 const data = await response.json();
+
+                // Extract user information from JWT token
+                const user = extractUserFromToken(data.token);
+
+                if (!user) {
+                    return {
+                        success: false,
+                        message: 'Failed to decode user information from token'
+                    };
+                }
+
                 return {
                     success: true,
                     token: data.token,
-                    user: data.user
+                    user: user
                 };
-                } else {
+            } else {
                 try {
                     const errorData = await response.json();
                     return {

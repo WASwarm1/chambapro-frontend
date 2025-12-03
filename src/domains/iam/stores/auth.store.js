@@ -81,10 +81,19 @@ export const useAuthStore = defineStore('auth', () => {
         const storedType = localStorage.getItem('user_type');
         const storedUser = localStorage.getItem('user_data');
 
-        if (storedToken && storedType && storedUser) {
-            token.value = storedToken;
-            userType.value = storedType;
-            user.value = JSON.parse(storedUser);
+        // Check if storedUser exists and is not the string "undefined"
+        if (storedToken && storedType && storedUser && storedUser !== 'undefined') {
+            try {
+                token.value = storedToken;
+                userType.value = storedType;
+                user.value = JSON.parse(storedUser);
+            } catch (err) {
+                console.error('Failed to parse stored user data:', err);
+                // Clear invalid data to prevent future errors
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user_type');
+                localStorage.removeItem('user_data');
+            }
         }
     }
 
