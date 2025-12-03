@@ -322,6 +322,11 @@ function goBack() {
               </div>
 
               <div class="info-item">
+                <label>{{ t('reservation.address') }}:</label>
+                <span>{{ reservation.address || t('reservation.notSpecified') }}</span>
+              </div>
+
+              <div class="info-item">
                 <label>{{ t('reservation.time') }}:</label>
                 <span>{{ reservation.time || t('reservation.notSpecified') }}</span>
               </div>

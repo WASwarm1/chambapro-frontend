@@ -96,6 +96,7 @@
     "serviceDetails": "Detalles del Servicio",
     "clientName": "Nombre del Cliente",
     "serviceType": "Tipo de Servicio",
+    "address": "Dirección",
     "date": "Fecha",
     "time": "Hora",
     "description": "Descripción",
