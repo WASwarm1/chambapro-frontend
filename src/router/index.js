@@ -25,6 +25,13 @@ const routes = [
         meta: { title: 'Reservation Agenda', requiresAuth: true, userType: 'technician' }
     },
     {
+        path: '/tech/reservation/:id',
+        name: 'reservation-details',
+        component: () => import('../domains/service/pages/reservation-details-page.vue'),
+        props: true,
+        meta: { title: 'Reservation Details', requiresAuth: true, userType: 'technician' }
+    },
+    {
         path: '/tech/statistics',
         name: 'technician-statistics',
         component: () => import('../domains/analytics/pages/statistics-page.vue'),

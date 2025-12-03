@@ -159,6 +159,7 @@ function getStatusSeverity(status) {
             severity="secondary"
             outlined
             class="details-button"
+            @click="$router.push(`/tech/reservation/${reserve.id}`)"
         />
       </div>
     </template>
