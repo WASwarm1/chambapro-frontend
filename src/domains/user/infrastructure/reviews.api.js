@@ -1,6 +1,6 @@
 ﻿export class ReviewsApi {
     constructor() {
-        this.baseURL = 'https://wa-swarm-2025-20-d3hac9guatdxfyby.brazilsouth-01.azurewebsites.net';
+        this.baseURL = 'https://chambapro-platform-production.up.railway.app';
     }
 
     async getByTechnicianId(technicianId) {
