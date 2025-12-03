@@ -42,7 +42,7 @@
 
             const technician = await response.json();
 
-            if (technician.userType !== 'technician') {
+            if (technician.userType !== 'Technician') {
                 throw new Error('User is not a technician');
             }
 
