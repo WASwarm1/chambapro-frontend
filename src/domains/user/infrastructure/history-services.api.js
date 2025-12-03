@@ -20,8 +20,8 @@
             // Convert reservations to service format and enrich with technician data
             let services = await Promise.all(reservations.map(async (reservation) => {
                 let technicianName = 'Técnico no asignado';
-                let category = reservation.categoryId;
-                let cost = 'Pendiente';
+                let category = reservation.categoryId || reservation.category;
+                let cost = null; // Use null instead of string for missing cost
 
                 if (reservation.technicianId) {
                     try {
@@ -29,11 +29,12 @@
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
                             technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no encontrado';
-                            category = reservation.categoryId;
 
                             // Calculate cost if technician has hourly rate
+                            // Assuming 2 hours as default if not specified
                             if (technician.hourlyRate) {
-                                cost = `S/ ${technician.hourlyRate * 1}`; // Default 1 hour, could be enhanced with estimated hours
+                                const estimatedHours = reservation.estimatedHours || 2;
+                                cost = technician.hourlyRate * estimatedHours; // Return as number
                             }
                         }
                     } catch (techError) {
@@ -48,7 +49,8 @@
                     date: reservation.date ? new Date(reservation.date).toLocaleDateString() : reservation.date,
                     originalDate: reservation.date, // Keep original for sorting
                     description: reservation.description,
-                    cost: cost,
+                    cost: cost, // Now a number or null
+                    estimatedCost: cost, // Also set estimatedCost as fallback
                     status: reservation.status,
                     technicianName: technicianName,
                     category: category,
@@ -80,6 +82,7 @@
             // Convert reservations to service format
             let services = await Promise.all(reservations.map(async (reservation) => {
                 let technicianName = 'Técnico no especificado';
+                let cost = null;
 
                 if (reservation.technicianId) {
                     try {
@@ -87,6 +90,12 @@
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
                             technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado';
+
+                            // Calculate cost if technician has hourly rate
+                            if (technician.hourlyRate) {
+                                const estimatedHours = reservation.estimatedHours || 2;
+                                cost = technician.hourlyRate * estimatedHours;
+                            }
                         }
                     } catch (techError) {
                         console.warn(`Could not fetch technician ${reservation.technicianId}:`, techError);
@@ -98,10 +107,11 @@
                     date: reservation.date ? new Date(reservation.date).toLocaleDateString() : reservation.date,
                     originalDate: reservation.date,
                     description: reservation.description,
-                    cost: 'S/ 0.00',
+                    cost: cost,
+                    estimatedCost: cost,
                     status: reservation.status,
                     technicianName: technicianName,
-                    category: reservation.categoryId,
+                    category: reservation.categoryId || reservation.category,
                     clientId: reservation.clientId,
                     technicianId: reservation.technicianId
                 };
