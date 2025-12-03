@@ -35,11 +35,18 @@
                     message: 'Review created successfully'
                 };
             } else {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Error al crear la reseña'
-                };
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Error al crear la reseña'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Error al crear la reseña: Server error'
+                    };
+                }
             }
         } catch (error) {
             return {

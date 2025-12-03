@@ -72,11 +72,18 @@
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Error creating reservation'
-                };
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Error creating reservation'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Error creating reservation: Server error'
+                    };
+                }
             }
 
             const createdReservation = await response.json();
@@ -115,11 +122,18 @@
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Error updating reservation'
-                };
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Error updating reservation'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Error updating reservation: Server error'
+                    };
+                }
             }
 
             return {
@@ -151,11 +165,18 @@
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Error cancelling reservation'
-                };
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Error cancelling reservation'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Error cancelling reservation: Server error'
+                    };
+                }
             }
 
             return {

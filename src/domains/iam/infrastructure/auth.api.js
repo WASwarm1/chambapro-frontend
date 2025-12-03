@@ -24,12 +24,19 @@
                     token: data.token,
                     user: data.user
                 };
-            } else {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Login failed'
-                };
+                } else {
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Login failed'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Login failed: Server error'
+                    };
+                }
             }
         } catch (error) {
             return {
@@ -72,11 +79,18 @@
                     message: 'Usuario registrado exitosamente'
                 };
             } else {
-                const errorData = await response.json();
-                return {
-                    success: false,
-                    message: errorData.message || 'Error al registrar usuario'
-                };
+                try {
+                    const errorData = await response.json();
+                    return {
+                        success: false,
+                        message: errorData.message || 'Error al registrar usuario'
+                    };
+                } catch (err) {
+                    return {
+                        success: false,
+                        message: 'Error al registrar usuario: Server error'
+                    };
+                }
             }
         } catch (error) {
             return {
