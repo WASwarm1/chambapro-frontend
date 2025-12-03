@@ -109,7 +109,7 @@ function getStatusSeverity(status) {
                 severity="info"
             />
             <pv-tag
-                :value="t('history.completedServices', { count: filteredServices.filter(s => s.status === 'Completado').length })"
+                :value="t('history.completedServices', { count: filteredServices.filter(s => s.status?.toLowerCase() === 'completed' || s.status?.toLowerCase() === 'completado').length })"
                 severity="success"
                 class="ml-2"
             />
