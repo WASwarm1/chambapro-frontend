@@ -25,21 +25,30 @@ const statusOptions = ref([
   { label: t('reservation.statusCompleted'), value: 'Completed', severity: 'success' }
 ]);
 
+const canAcceptReservation = computed(() => {
+  return reservation.value &&
+         reservation.value.status === 'Pending' &&
+         reservation.value.technicianId === null &&
+         authStore.isTechnician;
+});
+
 const canConfirmReservation = computed(() => {
   return reservation.value &&
          reservation.value.status === 'Pending' &&
-         reservation.value.technicianId === null;
+         reservation.value.technicianId === authStore.user?.id;
 });
 
 const canCancelReservation = computed(() => {
   return reservation.value &&
          reservation.value.status !== 'Completed' &&
-         reservation.value.status !== 'Cancelled';
+         reservation.value.status !== 'Cancelled' &&
+         (reservation.value.technicianId === authStore.user?.id || authStore.isTechnician);
 });
 
 const canCompleteReservation = computed(() => {
   return reservation.value &&
-         reservation.value.status === 'Assigned';
+         reservation.value.status === 'Assigned' &&
+         reservation.value.technicianId === authStore.user?.id;
 });
 
 const getStatusSeverity = (status) => {
@@ -131,6 +140,30 @@ async function cancelReservation() {
   }
 }
 
+async function acceptReservation() {
+  if (!canAcceptReservation.value) return;
+
+  if (!confirm(t('reservation.confirmAccept'))) return;
+
+  updating.value = true;
+  try {
+    await reservationApi.updateReservation(reservation.value.id, {
+      status: 'Assigned',
+      technicianId: authStore.user.id
+    });
+
+    reservation.value.status = 'Assigned';
+    reservation.value.technicianId = authStore.user.id;
+
+    alert(t('reservation.acceptedSuccessfully'));
+  } catch (err) {
+    console.error('Error accepting reservation:', err);
+    error.value = t('reservation.acceptError');
+  } finally {
+    updating.value = false;
+  }
+}
+
 async function completeReservation() {
   if (!canCompleteReservation.value) return;
 
@@ -210,6 +243,15 @@ function goBack() {
               />
 
               <div class="action-buttons" v-if="!updating">
+                <pv-button
+                    v-if="canAcceptReservation"
+                    :label="t('reservation.accept')"
+                    icon="pi pi-check"
+                    @click="acceptReservation"
+                    severity="success"
+                    class="action-btn"
+                />
+
                 <pv-button
                     v-if="canConfirmReservation"
                     :label="t('reservation.confirm')"

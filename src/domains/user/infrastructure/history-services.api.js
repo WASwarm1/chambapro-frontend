@@ -19,19 +19,26 @@
 
             // Convert reservations to service format and enrich with technician data
             let services = await Promise.all(reservations.map(async (reservation) => {
-                let technicianName = 'Técnico no especificado';
+                let technicianName = 'Técnico no asignado';
                 let category = reservation.categoryId;
+                let cost = 'Pendiente';
 
                 if (reservation.technicianId) {
                     try {
                         const technicianResponse = await fetch(`${this.baseURL}/api/v1/users/${reservation.technicianId}`);
                         if (technicianResponse.ok) {
                             const technician = await technicianResponse.json();
-                            technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no especificado';
+                            technicianName = technician ? `${technician.name} ${technician.lastName}`.trim() : 'Técnico no encontrado';
                             category = reservation.categoryId;
+
+                            // Calculate cost if technician has hourly rate
+                            if (technician.hourlyRate) {
+                                cost = `S/ ${technician.hourlyRate * 1}`; // Default 1 hour, could be enhanced with estimated hours
+                            }
                         }
                     } catch (techError) {
                         console.warn(`Could not fetch technician ${reservation.technicianId}:`, techError);
+                        technicianName = 'Error al cargar técnico';
                     }
                 }
 
@@ -41,7 +48,7 @@
                     date: reservation.date ? new Date(reservation.date).toLocaleDateString() : reservation.date,
                     originalDate: reservation.date, // Keep original for sorting
                     description: reservation.description,
-                    cost: 'S/ 0.00', // Placeholder - could be calculated
+                    cost: cost,
                     status: reservation.status,
                     technicianName: technicianName,
                     category: category,
