@@ -102,7 +102,6 @@ async function submitHireRequest() {
       date: formData.value.serviceDate,
       time: formData.value.serviceTime,
       description: formData.value.serviceDescription,
-      address: formData.value.address,
       clientId: authStore.user.id,
       categoryId: formData.value.serviceType
     };
